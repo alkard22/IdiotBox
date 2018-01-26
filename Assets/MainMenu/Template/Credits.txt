@@ -1,0 +1,5 @@
+Any text here will appear on the credits page.
+
+Template by Richard Gubb
+www.kiwasi.com
+https://bitbucket.org/BoredMormon/kiwasigamejamtemplate
