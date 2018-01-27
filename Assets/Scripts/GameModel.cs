@@ -239,7 +239,7 @@ public class GameModel
 		return revenueData;
 	}
 
-	public GameModel clone() {
+	public GameModel Clone() {
 
 		var newPop = population.Select(
 				demographic =>
