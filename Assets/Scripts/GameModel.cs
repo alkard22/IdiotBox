@@ -1,8 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AssemblyCSharp
 {
+
+	public enum Timeslot
+	{
+		Morning,
+		Afternoon,
+		PrimeTime,
+		Night
+	};
+
 	public class GameModel
 	{
 		int turn = 1;
@@ -17,7 +27,7 @@ namespace AssemblyCSharp
 		List<Demographic> population;
 
 
-		Demographic kidsDemographic = new Demographic ("Kids", 10000,
+		static Demographic kidsDemographic = new Demographic ("Kids", 10000,
 			new Dictionary<Timeslot, double>() {
 				{ Timeslot.Morning, 0.3 },
 				{ Timeslot.Afternoon, 0.5 },
@@ -26,7 +36,7 @@ namespace AssemblyCSharp
 			}
 		);
 
-		Demographic grownupsDemographic = new Demographic("Grownups", 20000, 
+		static Demographic grownupsDemographic = new Demographic("Grownups", 20000, 
 			new Dictionary<Timeslot, double>() {
 				{Timeslot.Morning, 0.3},
 				{Timeslot.Afternoon, 0.2},
@@ -35,6 +45,79 @@ namespace AssemblyCSharp
 			}
 		);
 
+		static ShowConcept morningShowConcept = new ShowConcept(
+			"morning show", 
+			"talking heads", 
+			100, 
+			2, 
+			new Dictionary<Demographic, int> {
+				{ kidsDemographic,  1},
+				{ grownupsDemographic, 5 }
+			}
+		);
+		static Show morningShow = morningShowConcept.toShow(false);
+
+		static ShowConcept cartoonConcept = new ShowConcept(
+			"roadrunner", 
+			"The cyote must always lose", 
+			150, 
+			3, 
+			new Dictionary<Demographic, int> {
+				{ kidsDemographic,  5},
+				{ grownupsDemographic, 1 }
+			}
+		);
+		static Show cartoonShow = cartoonConcept.toShow(false);
+
+		static ShowConcept newsConcept = new ShowConcept(
+			"news", 
+			"Sometimes it's even balanced", 
+			250, 
+			5, 
+			new Dictionary<Demographic, int> {
+				{ kidsDemographic,  2},
+				{ grownupsDemographic, 5 }
+			}
+		);
+		static Show newsShow = newsConcept.toShow(false);
+
+		static ShowConcept fishtankConcept = new ShowConcept(
+			"fishtank", 
+			"Think Finding Nemo!", 
+			20, 
+			1, 
+			new Dictionary<Demographic, int> {
+				{ kidsDemographic,  2},
+				{ grownupsDemographic, 2 }
+			}
+		);
+		static Show fishtankShow = fishtankConcept.toShow(false);
+
+		static ShowConcept blackMirrorConcept = new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
+			new Dictionary<Demographic, int> {
+				{ kidsDemographic, 0 },
+				{ grownupsDemographic, 10000 }
+			}
+		);
+		static Show blackMirrorShow = blackMirrorConcept.toShow(false);
+
+
+		Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
+			                   new DemographicTarget (grownupsDemographic, 10), 2);
+
+		Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
+				new DemographicTarget(grownupsDemographic, 10), 3);
+
+
+		Ad transformers = new Ad ("Transformers", "Robots in disguise", 
+			new DemographicTarget (kidsDemographic, 10), 3);		
+
+
+		Ad myLittlePony = new Ad ("My Little Pony \ud83d\udc34", "♩ I love my little pony ♫", 
+			new DemographicTarget (kidsDemographic, 10), 3);	
+
+		Ad vegemite = new Ad ("Vegemite", "Aussie kids... are vegemite kids", 
+			new DemographicTarget (grownupsDemographic, 8), 4);	
 
 
 		List<Show> availShows;
@@ -74,62 +157,58 @@ namespace AssemblyCSharp
 		List<ShowConcept> initConcepts()
 		{
 			return new List<ShowConcept> { 
-				new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
-					new Dictionary<Demographic, int> {
-						{ kidsDemographic, 0 },
-						{ grownupsDemographic, 10000 }
-					}
-				)
+				blackMirrorConcept
 			};
 		}
 
 
 		List<ShowConcept> initAvailConcepts()
 		{
-			return null;
+			return new List<ShowConcept>(allConcepts);
 		}
 
 
 		Dictionary<Timeslot, Show> initProgram()
 		{
-			return null;
+			return new Dictionary<Timeslot, Show>() {
+				{Timeslot.Morning, morningShow},
+				{Timeslot.Afternoon, cartoonShow},
+				{Timeslot.PrimeTime, newsShow},
+				{Timeslot.Night, fishtankShow},
+			};
 		}
 
 		List<Show> initAvailShows()
 		{
-			return null;
+			return new List<Show> { blackMirrorShow };
 		}
 
 
 		Dictionary<Timeslot, Ad> initAdProgram()
 		{
-			return null;
+			return new Dictionary<Timeslot, Ad>() {
+				{Timeslot.Morning, myLittlePony},
+				{Timeslot.Afternoon, transformers},
+				{Timeslot.PrimeTime, nationalTiles},
+				{Timeslot.Night, francoCozzo},
+			};
 		}
 
 
 		List<Ad> initAds()
 		{
-			return null;
+			return new List<Ad>() {vegemite};
 		}
 
 		List<Ad> initAvailAds()
 		{
-			return null;
+			return new List<Ad>(allAds);
 		}
 
 
 
 	}
-
-
-	public enum Timeslot
-	{
-		Morning,
-		Afternoon,
-		PrimeTime,
-		Night
-	};
-
+		
 	public class Demographic 
 	{
 		public string name;
@@ -161,6 +240,17 @@ namespace AssemblyCSharp
 			this.demographicAppeal = demographicAppeal;
 			this.price = price;
 			this.duration = duration;
+		}
+
+		public Show toShow(bool noise = true)
+		{
+			var random1 = noise ? UnityEngine.Random.Range(-10.0f, 10.0f) : 0.0f;
+			var peak = 0.01 * this.price + this.duration + random1;
+
+			var random2 = noise ? UnityEngine.Random.Range(-10.0f, 10.0f) : 0.0f;
+			var longevity = 0.01f * this.price + this.duration + random2;
+
+			return new Show(this, (int) peak, (int) longevity);
 		}
 
 	}
@@ -199,10 +289,12 @@ namespace AssemblyCSharp
 		public DemographicTarget primary;
 		public int revenueOther;
 
-		public Ad(DemographicTarget primary, int revenueOther)
+		public Ad(string name, string flavor, DemographicTarget primary, int revenueOther)
 		{
 			this.primary = primary;
 			this.revenueOther = revenueOther;
+			this.name = name;
+			this.flavor = flavor;
 		}
 	}
 
