@@ -5,17 +5,15 @@ using UnityEngine.UI;
 public class LibraryTileController : MonoBehaviour
 {
     public GameObject showTilePrefab;
-
     private List<GameObject> library = new List<GameObject>();
 
-    public List<GameObject> test = new List<GameObject>();
-
-    private void Start()
+    private void OnEnable()
     {
-        UpdateAvailableShows(test);
+        List<Show> shows = GameState.current.availShows;
+        UpdateAvailableShows(shows);
     }
 
-    public void UpdateAvailableShows(List<GameObject> shows)
+    public void UpdateAvailableShows(List<Show> shows)
     {
         float tileHeight = showTilePrefab.GetComponent<RectTransform>().sizeDelta.y;
         float spacing = this.GetComponent<VerticalLayoutGroup>().spacing;
@@ -23,9 +21,9 @@ public class LibraryTileController : MonoBehaviour
         this.GetComponent<RectTransform>().sizeDelta = new Vector2(0, (tileHeight+spacing) * (shows.Count + 1));
         library.Clear();
 
-        foreach(GameObject obj in shows) {
+        foreach(Show s in shows) {
             GameObject tile = Instantiate(showTilePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            tile.GetComponent<ShowTileView>().UpdateTileDetails(null, "Show Title Here"); // TODO: add the objects details
+            tile.GetComponent<ShowTileView>().UpdateTileDetails(s.Name);
             tile.transform.parent = this.transform;
             library.Add(tile);
         }

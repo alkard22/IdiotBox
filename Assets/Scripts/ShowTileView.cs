@@ -3,15 +3,15 @@ using UnityEngine.UI;
 
 public class ShowTileView : MonoBehaviour
 {
-    public Image image;
+    public ShowAvatar avatar;
     public Text titleField;
 
-    public void UpdateTileDetails (Sprite img, string title)
+    public void UpdateTileDetails (string title)
     {
-        if(img != null)
-            image.sprite = img;
-        if(title != null)
+        if(title != null) {
             titleField.text = title;
+            avatar.title = title;
+        }
     }
 
     public void TileSelected()
