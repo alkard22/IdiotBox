@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 222003560847639830}
   - component: {fileID: 114113553442959482}
   - component: {fileID: 114192782280074980}
+  - component: {fileID: 114139727094672540}
   m_Layer: 5
   m_Name: WeeklyActions
   m_TagString: Untagged
@@ -441,7 +442,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114139727094672540}
         m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
@@ -481,6 +482,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114139727094672540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342195455672284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c50954e62881645a2d50b7d998ed61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114171284252873666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -913,7 +925,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114938923684099940}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 0
+      - m_Target: {fileID: 1342195455672284}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114741153734453844
