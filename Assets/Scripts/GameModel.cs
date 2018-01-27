@@ -21,13 +21,19 @@ namespace AssemblyCSharp
 		List<ShowConcept> availConcepts;
 		Dictionary<ShowConcept, int> developingConcepts = new Dictionary<ShowConcept, int>();
 
-		List<Ad> allAds;
-		List<Ad> availAds;
+        public List<Ad> allAds;
+        public List<Ad> availAds;
 
-		List<Demographic> population;
+        public List<Demographic> population;
+
+        public List<Show> availShows;
+
+        public Dictionary<Timeslot, Show> showProgram;
+
+        public Dictionary<Timeslot, Ad> adProgram;
 
 
-		static Demographic kidsDemographic = new Demographic ("Kids", 10000,
+        static Demographic kidsDemographic = new Demographic ("Kids", 10000,
 			new Dictionary<Timeslot, double>() {
 				{ Timeslot.Morning, 0.3 },
 				{ Timeslot.Afternoon, 0.5 },
@@ -117,14 +123,7 @@ namespace AssemblyCSharp
 			new DemographicTarget (kidsDemographic, 10), 3);	
 
 		Ad vegemite = new Ad ("Vegemite", "Aussie kids... are vegemite kids", 
-			new DemographicTarget (grownupsDemographic, 8), 4);	
-
-
-		List<Show> availShows;
-
-		Dictionary<Timeslot, Show> showProgram;
-
-		Dictionary<Timeslot, Ad> adProgram;
+			new DemographicTarget (grownupsDemographic, 8), 4);
 
 		public GameModel ()
 		{
