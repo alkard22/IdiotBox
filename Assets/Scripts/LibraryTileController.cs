@@ -14,13 +14,20 @@ public class LibraryTileController : MonoBehaviour
         UpdateAvailableShows(shows);
     }
 
-    public void UpdateAvailableShows(List<Show> shows)
+    private void OnDisable()
+    {
+        for(int i = 0; i < library.Count; i++) {
+            Destroy(library[i]);
+        }
+        library.Clear();
+    }
+
+    private void UpdateAvailableShows(List<Show> shows)
     {
         float tileHeight = showTilePrefab.GetComponent<RectTransform>().sizeDelta.y;
         float spacing = this.GetComponent<VerticalLayoutGroup>().spacing;
 
         this.GetComponent<RectTransform>().sizeDelta = new Vector2(0, (tileHeight+spacing) * (shows.Count + 1));
-        library.Clear();
 
         foreach(Show s in shows) {
             GameObject tile = Instantiate(showTilePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
