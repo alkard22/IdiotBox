@@ -219,7 +219,19 @@ public class GameModel
 		var revenueData = new Dictionary<Timeslot, int>();
 
 		foreach (Timeslot slot in Enum.GetValues(typeof(Timeslot))) {
-			revenueData [slot] = 100;
+			var ad = adProgram [slot];
+			var revenue = 0;
+
+			if (ad != null)
+			{
+				var viewers = Viewers(slot);
+				var otherViewers = viewers
+										.Where (pair => pair.Key != ad.primary.target)
+										.Aggregate (0, (sum, pair) => sum += pair.Value);
+				revenue = ad.primary.revenue * viewers [ad.primary.target] + ad.revenueOther * otherViewers;
+			}
+
+			revenueData [slot] = revenue;
 		}
 		return revenueData;
 	}
