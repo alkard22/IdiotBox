@@ -24,7 +24,7 @@ namespace AssemblyCSharp
 				{ Timeslot.PrimeTime, 0.2 },
 				{ Timeslot.Night, 0.1 }
 			}
-        );
+		);
 
 		Demographic grownupsDemographic = new Demographic("Grownups", 20000, 
 			new Dictionary<Timeslot, double>() {
@@ -52,18 +52,8 @@ namespace AssemblyCSharp
 			allAds = initAds();
 			availAds = initAvailAds();
 
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-		static List<Timeslot> initSlots()
-		{
-			return null;
-		}
-
-        static List<Demographic> initPopulation()
-		{
-            return null;
-=======
 			population = initPopulation();
-		
+
 
 			availShows = initAvailShows();
 
@@ -79,14 +69,10 @@ namespace AssemblyCSharp
 				kidsDemographic,
 				grownupsDemographic,
 			};
->>>>>>> made code compile
 		}
 
-        static List<ShowConcept> initConcepts()
+		List<ShowConcept> initConcepts()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return new List<ShowConcept> { 
 				new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
 					new Dictionary<Demographic, int> {
@@ -95,66 +81,44 @@ namespace AssemblyCSharp
 					}
 				)
 			};
->>>>>>> made code compile
 		}
 
 
-        static List<ShowConcept> initAvailConcepts()
+		List<ShowConcept> initAvailConcepts()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return null;
->>>>>>> made code compile
 		}
 
 
-        static Dictionary<Timeslot, Show> initProgram()
+		Dictionary<Timeslot, Show> initProgram()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return null;
->>>>>>> made code compile
 		}
 
-        static List<Show> initAvailShows()
+		List<Show> initAvailShows()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return null;
->>>>>>> made code compile
 		}
 
 
-        static Dictionary<Timeslot, Ad> initAdProgram()
+		Dictionary<Timeslot, Ad> initAdProgram()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return null;
->>>>>>> made code compile
 		}
 
 
-        static List<Ad> initAds()
+		List<Ad> initAds()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return null;
->>>>>>> made code compile
 		}
 
-        static List<Ad> initAvailAds()
+		List<Ad> initAvailAds()
 		{
-<<<<<<< 59325650406941d7a16485931d09f88224f83176
-            return null;
-=======
 			return null;
->>>>>>> made code compile
 		}
+
+
+
 	}
 
 
@@ -198,7 +162,7 @@ namespace AssemblyCSharp
 			this.price = price;
 			this.duration = duration;
 		}
-			
+
 	}
 
 	public class Show {
@@ -218,8 +182,8 @@ namespace AssemblyCSharp
 
 	public class DemographicTarget 
 	{
-		Demographic target;
-		int revenue;
+		public Demographic target;
+		public int revenue;
 
 		public DemographicTarget(Demographic target, int revenue) 	
 		{
@@ -233,12 +197,12 @@ namespace AssemblyCSharp
 		string name;
 		string flavor;
 		public DemographicTarget primary;
-		public DemographicTarget other;
+		public int revenueOther;
 
 		public Ad(DemographicTarget primary, int revenueOther)
 		{
 			this.primary = primary;
-			this.other = other;
+			this.revenueOther = revenueOther;
 		}
 	}
 
