@@ -262,7 +262,10 @@ public class GameModel
 							pair.Key,
 							new Show (pair.Value.concept,
 									pair.Value.peak,
-									pair.Value.longevity))).ToDictionary(pair => pair.Key, pair => pair.Value);
+									pair.Value.longevity,
+					                pair.Value.weeksShowing
+									))
+			).ToDictionary(pair => pair.Key, pair => pair.Value);
 
 		return new GameModel (newPop, newAvailShows, new List<Ad> (availAds), new List<ShowConcept> (availConcepts),
 				new Dictionary<ShowConcept, int> (developingConcepts), newShowProgram, new Dictionary<Timeslot, Ad> (adProgram));
@@ -272,7 +275,9 @@ public class GameModel
 
 		turn++;
 		balance += Revenue ().Aggregate (0, (sum, pair) => sum += pair.Value);
-
+		foreach(var item in showProgram) {
+			item.Value.weeksShowing++;
+		}
 	}
 }
 
@@ -331,11 +336,12 @@ public class Show {
 	public float longevity;
 	public int weeksShowing = 0;
 
-	public Show(ShowConcept concept, float peak, float longevity)
+	public Show(ShowConcept concept, float peak, float longevity, int weeksShowing = 0)
 	{
 		this.concept = concept;
 		this.peak = peak;
 		this.longevity = longevity;
+		this.weeksShowing = weeksShowing;
 	}
 
 	public float Appeal(Demographic demographic) 
