@@ -268,14 +268,6 @@ new Dictionary<Demographic, int> {
 	}
 
 	public GameModel Clone() {
-
-        var newPop = population.Select(
-                demographic =>
-                    new Demographic(
-                            demographic.name,
-                            demographic.size,
-                            new Dictionary<Timeslot, double>(demographic.timeslotPrefs))).ToList();
-
         var newAvailShows = availShows.Select (
 				show =>
 					new Show (
@@ -294,7 +286,7 @@ new Dictionary<Demographic, int> {
 									))
 			).ToDictionary(pair => pair.Key, pair => pair.Value);
 
-		return new GameModel (newPop, newAvailShows, new List<Ad> (availAds), new List<ShowConcept> (availConcepts),
+		return new GameModel (new List<Demographic>(population), newAvailShows, new List<Ad> (availAds), new List<ShowConcept> (availConcepts),
 				new Dictionary<ShowConcept, int> (developingConcepts), newShowProgram, new Dictionary<Timeslot, Ad> (adProgram));
 	}
 
@@ -394,8 +386,18 @@ public class Show {
 			(weeksShowing > PEAK_DECAY_TURNS) ?
 				1.0 / Math.Pow(2.0, afterPeak/longevity): 
 				1.0;
-		
-		return (float)(concept.demographicAppeal[demographic] * peak * scale);
+
+
+		try {
+			return (float)(concept.demographicAppeal[demographic] * peak * scale);
+		} catch(Exception e) {
+			Debug.Log (demographic.name);
+			Debug.Log (concept.demographicAppeal.Count);
+			foreach (var a in concept.demographicAppeal) {
+				Debug.Log (a.Key.name);
+			}
+			throw e;
+		}
 	}
  
 	public string Name

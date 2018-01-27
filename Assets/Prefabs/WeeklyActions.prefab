@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 222003560847639830}
   - component: {fileID: 114113553442959482}
   - component: {fileID: 114192782280074980}
+  - component: {fileID: 114021542487258048}
   m_Layer: 5
   m_Name: WeeklyActions
   m_TagString: Untagged
@@ -287,6 +288,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114021542487258048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342195455672284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c50954e62881645a2d50b7d998ed61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114051396942346572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -394,9 +406,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1342195455672284}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 114021542487258048}
+        m_MethodName: EndTurn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
