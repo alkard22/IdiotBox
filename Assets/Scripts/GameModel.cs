@@ -30,18 +30,8 @@ public class GameModel
 
 	public Dictionary<Timeslot, Ad> adProgram;
 
-	public Dictionary<Demographic, int> viewers(Timeslot slot)
-	{
-		var viewerData = new Dictionary<Demographic, int>();
+	public int balance;
 
-		foreach(Demographic demographic in population)
-		{
-			viewerData [demographic] = 100;
-		}
-
-		return viewerData;
-	}
-		
 	static Demographic kidsDemographic = new Demographic ("Kids", 10000,
 		new Dictionary<Timeslot, double>() {
 			{ Timeslot.Morning, 0.3 },
@@ -111,11 +101,10 @@ public class GameModel
 	static ShowConcept blackMirrorConcept = new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic, 0 },
-			{ grownupsDemographic, 10000 }
+			{ grownupsDemographic, 5 }
 		}
 	);
 	static Show blackMirrorShow = blackMirrorConcept.toShow(false);
-
 
 	Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
 		new DemographicTarget (grownupsDemographic, 10), 2);
@@ -123,10 +112,8 @@ public class GameModel
 	Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
 		new DemographicTarget(grownupsDemographic, 10), 3);
 
-
 	Ad transformers = new Ad ("Transformers", "Robots in disguise", 
 		new DemographicTarget (kidsDemographic, 10), 3);		
-
 
 	Ad myLittlePony = new Ad ("My Little Pony \ud83d\udc34", "♩ I love my little pony ♫", 
 		new DemographicTarget (kidsDemographic, 10), 3);	
@@ -151,8 +138,9 @@ public class GameModel
 		showProgram = initProgram();
 
 		adProgram = initAdProgram();
-	}
 
+		balance = 10000000;
+	}
 
 	List<Demographic> initPopulation()
 	{
@@ -212,9 +200,41 @@ public class GameModel
 	{
 		return new List<Ad>(allAds);
 	}
+		
+	public Dictionary<Demographic, int> Viewers(Timeslot slot)
+	{
+		var viewerData = new Dictionary<Demographic, int>();
 
+		foreach(Demographic demographic in population)
+		{
+			var show = showProgram [slot];
+			viewerData[demographic] = (int) (show.Appeal(demographic) * demographic.timeslotPrefs[slot]);
+		}
 
+		return viewerData;
+	}
 
+	public Dictionary<Timeslot, int> Revenue()
+	{
+		var revenueData = new Dictionary<Timeslot, int>();
+
+		foreach (Timeslot slot in Enum.GetValues(typeof(Timeslot))) {
+			var ad = adProgram [slot];
+			var revenue = 0;
+
+			if (ad != null)
+			{
+				var viewers = Viewers(slot);
+				var otherViewers = viewers
+										.Where (pair => pair.Key != ad.primary.target)
+										.Aggregate (0, (sum, pair) => sum += pair.Value);
+				revenue = ad.primary.revenue * viewers [ad.primary.target] + ad.revenueOther * otherViewers;
+			}
+
+			revenueData [slot] = revenue;
+		}
+		return revenueData;
+	}
 }
 
 public class Demographic 
@@ -274,6 +294,15 @@ public class Show {
 		this.concept = concept;
 		this.peak = peak;
 		this.longevity = longevity;
+	}
+
+	public float Appeal(Demographic demographic) {
+		return concept.demographicAppeal[demographic] * peak;
+	}
+
+	public string Name
+	{
+		get { return concept.name; }
 	}
 
 }
