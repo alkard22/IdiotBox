@@ -32,19 +32,6 @@ public class GameModel
 
 	public int balance;
 
-	public Dictionary<Demographic, int> Viewers(Timeslot slot)
-	{
-		var viewerData = new Dictionary<Demographic, int>();
-
-		foreach(Demographic demographic in population)
-		{
-			var show = showProgram [slot];
-			viewerData[demographic] = (int) (show.Appeal(demographic) * demographic.timeslotPrefs[slot]);
-		}
-
-		return viewerData;
-	}
-		
 	static Demographic kidsDemographic = new Demographic ("Kids", 10000,
 		new Dictionary<Timeslot, double>() {
 			{ Timeslot.Morning, 0.3 },
@@ -119,17 +106,14 @@ public class GameModel
 	);
 	static Show blackMirrorShow = blackMirrorConcept.toShow(false);
 
-
 	Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
 		new DemographicTarget (grownupsDemographic, 10), 2);
 
 	Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
 		new DemographicTarget(grownupsDemographic, 10), 3);
 
-
 	Ad transformers = new Ad ("Transformers", "Robots in disguise", 
 		new DemographicTarget (kidsDemographic, 10), 3);		
-
 
 	Ad myLittlePony = new Ad ("My Little Pony \ud83d\udc34", "♩ I love my little pony ♫", 
 		new DemographicTarget (kidsDemographic, 10), 3);	
@@ -157,7 +141,6 @@ public class GameModel
 
 		balance = 10000000;
 	}
-
 
 	List<Demographic> initPopulation()
 	{
@@ -216,6 +199,19 @@ public class GameModel
 	List<Ad> initAvailAds()
 	{
 		return new List<Ad>(allAds);
+	}
+		
+	public Dictionary<Demographic, int> Viewers(Timeslot slot)
+	{
+		var viewerData = new Dictionary<Demographic, int>();
+
+		foreach(Demographic demographic in population)
+		{
+			var show = showProgram [slot];
+			viewerData[demographic] = (int) (show.Appeal(demographic) * demographic.timeslotPrefs[slot]);
+		}
+
+		return viewerData;
 	}
 
 }
