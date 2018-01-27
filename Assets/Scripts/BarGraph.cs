@@ -10,7 +10,6 @@ public class BarGraph : MonoBehaviour {
     {
         public void AddData(Timeslot t, Demographic d, int viewership)
         {
-            Debug.Log(" Adding " + t + " " + d + " " + viewership);
             Dictionary<Demographic, int> value;
             if (!ContainsKey(t))
             {
@@ -28,10 +27,10 @@ public class BarGraph : MonoBehaviour {
         }
     }
 
-    public Material toddlers;
-    public Material armchairAthletes;
-    public Material closetRomantics;
-    public Material adrenalineJunkies;
+
+
+    public Material kids;
+    public Material grownups;
 
     public Image graphImageObject;
 
@@ -42,53 +41,43 @@ public class BarGraph : MonoBehaviour {
 
     void Awake()
     {
-        Dictionary<Demographic, Material> colors = new Dictionary<Demographic, Material>();
-        colors.Add(Demographic.Toddlers, toddlers);
-        colors.Add(Demographic.ArmchairAthletes, armchairAthletes);
-        colors.Add(Demographic.ClosetRomantics, closetRomantics);
-        colors.Add(Demographic.AdrenalineJunkies, adrenalineJunkies);
+        Dictionary<String, Material> colors = new Dictionary<String, Material>();
+        colors.Add("Kids", kids);
+        colors.Add("Grownups", grownups);
 
         foreach (Timeslot t in Enum.GetValues(typeof(Timeslot)))
         {
-            GameObject horizontal = new GameObject();
-            HorizontalLayoutGroup hlg = horizontal.AddComponent<HorizontalLayoutGroup>();
-            hlg.name = t.ToString() + "Group";
-            horizontal.GetComponent<RectTransform>().parent = this.transform;
-            hlg.childControlHeight = false;
-            hlg.childControlWidth = false;
-            hlg.childForceExpandHeight = false;
-            hlg.childForceExpandWidth = false;
-            horizontal.GetComponent<RectTransform>().sizeDelta = new Vector2(200, barFixedWidth);
+            GameObject horizontal = buildHorizontalLayoutGroup(t.ToString() + "Group");
 
-
-            foreach (Demographic d in Enum.GetValues(typeof(Demographic)))
+            
+            foreach (Demographic d in GameState.current.population)
             {
                 data.AddData(t, d, 0);
 
-                String key = t.ToString() + "-" + d.ToString();
+                String key = t.ToString() + "-" + d.name;
                 Image bar = Instantiate(graphImageObject);
-                bar.material = colors[d];
+                bar.material = colors[d.name];
+                bar.name = d.name;
                 
                 bars.Add(key, bar);
                 bar.GetComponent<RectTransform>().sizeDelta = new Vector2(data[t][d], barFixedWidth);
-                bar.GetComponent<RectTransform>().parent = horizontal.transform;
+                bar.GetComponent<RectTransform>().SetParent(horizontal.transform);
             }
         }
     }
 
-    void Start()
+    GameObject buildHorizontalLayoutGroup(String name)
     {
-        data.AddData(Timeslot.Morning, Demographic.Toddlers, 70);
-        data.AddData(Timeslot.Morning, Demographic.ArmchairAthletes, 10);
-
-        data.AddData(Timeslot.Daytime, Demographic.ClosetRomantics, 50);
-        data.AddData(Timeslot.Daytime, Demographic.ArmchairAthletes, 20);
-
-        data.AddData(Timeslot.PrimeTime, Demographic.Toddlers, 10);
-        data.AddData(Timeslot.PrimeTime, Demographic.ClosetRomantics, 80);
-        data.AddData(Timeslot.PrimeTime, Demographic.AdrenalineJunkies, 10);
-
-        data.AddData(Timeslot.Night, Demographic.AdrenalineJunkies, 10);
+        GameObject horizontal = new GameObject();
+        HorizontalLayoutGroup hlg = horizontal.AddComponent<HorizontalLayoutGroup>();
+        hlg.name = name;
+        horizontal.GetComponent<RectTransform>().SetParent(this.transform);
+        hlg.childControlHeight = false;
+        hlg.childControlWidth = false;
+        hlg.childForceExpandHeight = false;
+        hlg.childForceExpandWidth = false;
+        horizontal.GetComponent<RectTransform>().sizeDelta = new Vector2(200, barFixedWidth);
+        return horizontal;
     }
 
     void Update()
@@ -98,12 +87,13 @@ public class BarGraph : MonoBehaviour {
         foreach (Timeslot t in timeslots)
         {
             int totalAudienceOffset = 0;
-            foreach (Demographic d in Enum.GetValues(typeof(Demographic)))
+            Dictionary<Demographic, int> viewers = GameState.current.viewers(t);
+            foreach (Demographic d in viewers.Keys)
             {
-                String key = t.ToString() + "-" + d.ToString();
+                String key = t.ToString() + "-" + d.name;
                 RectTransform rect = bars[key].GetComponent<RectTransform>();
-                rect.sizeDelta = new Vector2(data[t][d], barFixedWidth);
-                totalAudienceOffset += data[t][d];
+                rect.sizeDelta = new Vector2(viewers[d], barFixedWidth);
+                totalAudienceOffset += viewers[d];
             }
         }
     }
