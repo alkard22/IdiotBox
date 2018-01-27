@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b2266ad4bbf94383e329a76c9a37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 114072334763918672, guid: db0c08918d3aa2b43b041e667c79e493, type: 2}
+  config: {fileID: 114072334763918672, guid: c4eeda00d64700b418c5cfb66215e266, type: 2}
   title: George
 --- !u!114 &114485762481581562
 MonoBehaviour:
