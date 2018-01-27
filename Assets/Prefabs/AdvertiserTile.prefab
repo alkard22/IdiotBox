@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224193101864215076}
   - component: {fileID: 222629610115362992}
-  - component: {fileID: 114523720585209262}
+  - component: {fileID: 114470338647539196}
   - component: {fileID: 114749202615572696}
   - component: {fileID: 114590567083605846}
   m_Layer: 5
@@ -311,7 +311,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
---- !u!114 &114523720585209262
+--- !u!114 &114470338647539196
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -319,11 +319,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749910068445096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1cccac48c65354a8eb413c2598f018, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aece0f9ff3fb7545bf298011160836f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   avatar: {fileID: 114280457686492402}
-  titleField: {fileID: 114635860728943594}
+  adName: {fileID: 114635860728943594}
+  primary: {fileID: 114663474457061056}
+  secondary: {fileID: 114034897813701240}
 --- !u!114 &114590567083605846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,7 +365,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114523720585209262}
+      - m_Target: {fileID: 0}
         m_MethodName: TileSelected
         m_Mode: 1
         m_Arguments:
