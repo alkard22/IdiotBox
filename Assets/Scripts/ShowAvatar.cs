@@ -19,7 +19,7 @@ public class ShowAvatar : MonoBehaviour {
 
         GenerateAvatar();
     }
-	
+
     public void GenerateAvatar()
     {
         byte[] hash = MD5.Create().ComputeHash(System.Text.Encoding.ASCII.GetBytes(title));

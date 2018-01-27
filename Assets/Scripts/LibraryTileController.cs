@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LibraryTileController : MonoBehaviour
 {
+    public ShowDetailsView detailsView;
     public GameObject showTilePrefab;
     private List<GameObject> library = new List<GameObject>();
 
@@ -23,7 +24,7 @@ public class LibraryTileController : MonoBehaviour
 
         foreach(Show s in shows) {
             GameObject tile = Instantiate(showTilePrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-            tile.GetComponent<ShowTileView>().UpdateTileDetails(s.Name);
+            tile.GetComponent<ShowTileView>().SetShowData(s);
             tile.transform.parent = this.transform;
             library.Add(tile);
         }
@@ -41,6 +42,7 @@ public class LibraryTileController : MonoBehaviour
             }
             obj.GetComponent<Image>().color = c;
         }
+        detailsView.UpdateShowDetailsPanel(tile.GetComponent<ShowTileView>().GetShowData());
     }
 
 }

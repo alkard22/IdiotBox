@@ -6,12 +6,20 @@ public class ShowTileView : MonoBehaviour
     public ShowAvatar avatar;
     public Text titleField;
 
-    public void UpdateTileDetails (string title)
+    private Show show;
+
+    public void SetShowData(Show s)
     {
-        if(title != null) {
-            titleField.text = title;
-            avatar.title = title;
+        if(s != null) {
+            titleField.text = s.concept.name;
+            avatar.title = s.concept.name;
+            show = s;
         }
+    }
+
+    public Show GetShowData()
+    {
+        return show;
     }
 
     public void TileSelected()

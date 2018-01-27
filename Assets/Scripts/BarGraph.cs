@@ -96,7 +96,7 @@ public class BarGraph : MonoBehaviour {
         {
             int totalAudienceOffset = 0;
             Dictionary<Demographic, int> viewers = GameState.current.Viewers(t);
-            avatars[t].title = GameState.current.showProgram[t].Name;
+            avatars[t].title = GameState.current.showProgram[t].concept.name;
             avatars[t].GenerateAvatar();
             foreach (Demographic d in viewers.Keys)
             {

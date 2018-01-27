@@ -399,11 +399,6 @@ public class Show {
 			throw e;
 		}
 	}
- 
-	public string Name
-	{
-		get { return concept.name; }
-	}
 }
 
 public class DemographicTarget 
