@@ -121,23 +121,26 @@ public class GameModel
 	Ad vegemite = new Ad ("Vegemite", "Aussie kids... are vegemite kids", 
 		new DemographicTarget (grownupsDemographic, 8), 4);
 
-	public GameModel ()
+	public GameModel (List<Demographic> population = null,
+		List<Show> availShows = null,
+		List<Ad> availAds = null,
+		List<ShowConcept> availConcepts = null,
+		Dictionary<ShowConcept, int> developingConcepts = null,
+		Dictionary<Timeslot, Show> showProgram = null,
+		Dictionary<Timeslot, Ad> adProgram = null)
 	{
-		allConcepts = initConcepts();
-		availConcepts = initAvailConcepts();
-		developingConcepts = new Dictionary<ShowConcept, int>();
+		this.allConcepts = initConcepts();
+		this.allAds = initAds();
 
-		allAds = initAds();
-		availAds = initAvailAds();
+		this.population = (population == null) ? population : initPopulation();
 
-		population = initPopulation();
+		this.availShows = (availShows == null) ? availShows : initAvailShows();
+		this.availAds = (availAds == null) ? availAds : initAvailAds();
+		this.availConcepts = (availConcepts == null) ? availConcepts : initAvailConcepts();
+		this.developingConcepts = (developingConcepts == null) ? developingConcepts : new Dictionary<ShowConcept, int>();
 
-
-		availShows = initAvailShows();
-
-		showProgram = initProgram();
-
-		adProgram = initAdProgram();
+		this.showProgram = (showProgram == null) ? showProgram : initProgram();
+		this.adProgram = (adProgram == null) ? adProgram: initAdProgram();
 
 		balance = 10000000;
 	}
@@ -234,6 +237,34 @@ public class GameModel
 			revenueData [slot] = revenue;
 		}
 		return revenueData;
+	}
+
+	public GameModel clone() {
+
+		var newPop = population.Select(
+				demographic =>
+					new Demographic(
+							demographic.name,
+							demographic.size,
+							new Dictionary<Timeslot, double>(demographic.timeslotPrefs))).ToList();
+
+		var newAvailShows = availShows.Select (
+				show =>
+					new Show (
+						show.concept,
+						show.peak,
+						show.longevity)).ToList();
+
+		var newShowProgram = showProgram.Select (
+				pair =>
+					new KeyValuePair<Timeslot, Show> (
+							pair.Key,
+							new Show (pair.Value.concept,
+									pair.Value.peak,
+									pair.Value.longevity))).ToDictionary(pair => pair.Key, pair => pair.Value);
+
+		return new GameModel (newPop, newAvailShows, new List<Ad> (availAds), new List<ShowConcept> (availConcepts),
+				new Dictionary<ShowConcept, int> (developingConcepts), newShowProgram, new Dictionary<Timeslot, Ad> (adProgram));
 	}
 
 	public void NextTurn() {
