@@ -30,6 +30,7 @@ public class GameModel
 
 	public Dictionary<Timeslot, Ad> adProgram;
 
+	public int balance;
 
 	public Dictionary<Demographic, int> Viewers(Timeslot slot)
 	{
@@ -153,6 +154,8 @@ public class GameModel
 		showProgram = initProgram();
 
 		adProgram = initAdProgram();
+
+		balance = 10000000;
 	}
 
 
