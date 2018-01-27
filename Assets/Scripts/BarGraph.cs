@@ -32,12 +32,15 @@ public class BarGraph : MonoBehaviour {
     public Material kids;
     public Material grownups;
 
-    public Image graphImageObject;
+    public Image graphImagePrefab;
+    public ShowAvatar avatarPrefab;
+    public GameObject spacer;
 
-    private int barFixedWidth = 20;
+    private int barFixedWidth = 30;
 
     private Data data = new Data();
     private Dictionary<String, Image> bars = new Dictionary<String, Image>();
+    private Dictionary<Timeslot, ShowAvatar> avatars = new Dictionary<Timeslot, ShowAvatar>();
 
     void Awake()
     {
@@ -48,14 +51,19 @@ public class BarGraph : MonoBehaviour {
         foreach (Timeslot t in Enum.GetValues(typeof(Timeslot)))
         {
             GameObject horizontal = buildHorizontalLayoutGroup(t.ToString() + "Group");
+            ShowAvatar avatar = Instantiate(avatarPrefab);
+            avatar.GetComponent<RectTransform>().SetParent(horizontal.transform);
+            avatars.Add(t, avatar);
 
-            
+            GameObject space = Instantiate(spacer);
+            space.GetComponent<RectTransform>().SetParent(horizontal.transform);
+
             foreach (Demographic d in GameState.current.population)
             {
                 data.AddData(t, d, 0);
 
                 String key = t.ToString() + "-" + d.name;
-                Image bar = Instantiate(graphImageObject);
+                Image bar = Instantiate(graphImagePrefab);
                 bar.material = colors[d.name];
                 bar.name = d.name;
                 
@@ -80,7 +88,7 @@ public class BarGraph : MonoBehaviour {
         return horizontal;
     }
 
-    void Update()
+    void Redraw()
     {
         Array timeslots = Enum.GetValues(typeof(Timeslot));
         Array.Reverse(timeslots);
@@ -88,6 +96,8 @@ public class BarGraph : MonoBehaviour {
         {
             int totalAudienceOffset = 0;
             Dictionary<Demographic, int> viewers = GameState.current.Viewers(t);
+            avatars[t].title = GameState.current.showProgram[t].Name;
+            avatars[t].GenerateAvatar();
             foreach (Demographic d in viewers.Keys)
             {
                 String key = t.ToString() + "-" + d.name;
@@ -96,5 +106,10 @@ public class BarGraph : MonoBehaviour {
                 totalAudienceOffset += viewers[d];
             }
         }
+    }
+
+    void Update()
+    {
+        Redraw();
     }
 }

@@ -69,8 +69,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kids: {fileID: 2100000, guid: cca684290bc2d2648a37dbf21d0ee9da, type: 2}
   grownups: {fileID: 2100000, guid: 269540b3986978040b62b0a9ed81abb9, type: 2}
-  graphImageObject: {fileID: 114669883104302542, guid: df8dcf95640a05a4fb8e0fd6f3235a48,
+  graphImagePrefab: {fileID: 114669883104302542, guid: df8dcf95640a05a4fb8e0fd6f3235a48,
     type: 2}
+  avatarPrefab: {fileID: 114442862399566710, guid: 4ea44ad4e9b02a449a6fe3a031208894,
+    type: 2}
+  spacer: {fileID: 1306434014159142, guid: 981db22583ae6b04085fab4bb0c574c4, type: 2}
 --- !u!222 &222048066488897048
 CanvasRenderer:
   m_ObjectHideFlags: 1

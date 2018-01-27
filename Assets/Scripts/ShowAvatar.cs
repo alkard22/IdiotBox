@@ -27,6 +27,34 @@ public class ShowAvatar : MonoBehaviour {
 
         background.color = config.colors[hashed % config.colors.Length];
         word.font = config.fonts[hashed % config.fonts.Length];
-        word.text = "" + title.ToCharArray()[0];
+        if( title.Length <= 0)
+        {
+            title = "*";
+        }
+        string firstLetter = "" + title.ToCharArray()[0];
+        if ( hashed % 2 == 0 )
+        {
+            firstLetter = ToggleCase(firstLetter);
+        }
+        word.text = firstLetter;
+    }
+
+
+    private string ToggleCase(string input)
+    {
+        string result = string.Empty;
+        char[] inputArray = input.ToCharArray();
+
+        foreach (char c in inputArray)
+        {
+            if (char.IsLower(c))
+                result += c.ToString().ToUpper();
+            else if (char.IsUpper(c))
+                result += c.ToString().ToLower();
+            else
+                result += c.ToString();
+        }
+
+        return result;
     }
 }
