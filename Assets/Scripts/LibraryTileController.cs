@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class LibraryTileController : MonoBehaviour
 {
-    public Color normalColor;
-    public Color selectColor;
     public GameObject showTilePrefab;
 
     private List<GameObject> library = new List<GameObject>();
@@ -37,11 +35,13 @@ public class LibraryTileController : MonoBehaviour
     public void SetTileAsActive(GameObject tile)
     {
         foreach(GameObject obj in library) {
+            Color c = obj.GetComponent<Image>().color;
             if(obj.GetInstanceID() == tile.GetInstanceID()) {
-                obj.GetComponent<Image>().color = selectColor;
+                c.a = 0;
             } else {
-                obj.GetComponent<Image>().color = normalColor;
+                c.a = 255;
             }
+            obj.GetComponent<Image>().color = c;
         }
     }
 
