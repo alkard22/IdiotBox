@@ -35,8 +35,7 @@ public class BarGraph : MonoBehaviour {
 
     public Image graphImageObject;
 
-    public int barFixedWidth = 20;
-    public int padding = 10;
+    private int barFixedWidth = 20;
 
     private Data data = new Data();
     private Dictionary<String, Image> bars = new Dictionary<String, Image>();
@@ -51,6 +50,17 @@ public class BarGraph : MonoBehaviour {
 
         foreach (Timeslot t in Enum.GetValues(typeof(Timeslot)))
         {
+            GameObject horizontal = new GameObject();
+            HorizontalLayoutGroup hlg = horizontal.AddComponent<HorizontalLayoutGroup>();
+            hlg.name = t.ToString() + "Group";
+            horizontal.GetComponent<RectTransform>().parent = this.transform;
+            hlg.childControlHeight = false;
+            hlg.childControlWidth = false;
+            hlg.childForceExpandHeight = false;
+            hlg.childForceExpandWidth = false;
+            horizontal.GetComponent<RectTransform>().sizeDelta = new Vector2(200, barFixedWidth);
+
+
             foreach (Demographic d in Enum.GetValues(typeof(Demographic)))
             {
                 data.AddData(t, d, 0);
@@ -58,9 +68,10 @@ public class BarGraph : MonoBehaviour {
                 String key = t.ToString() + "-" + d.ToString();
                 Image bar = Instantiate(graphImageObject);
                 bar.material = colors[d];
-
+                
                 bars.Add(key, bar);
-                bar.rectTransform.parent = this.GetComponent<RectTransform>();
+                bar.GetComponent<RectTransform>().sizeDelta = new Vector2(data[t][d], barFixedWidth);
+                bar.GetComponent<RectTransform>().parent = horizontal.transform;
             }
         }
     }
@@ -82,7 +93,6 @@ public class BarGraph : MonoBehaviour {
 
     void Update()
     {
-        int timeslotOffset = 0;
         Array timeslots = Enum.GetValues(typeof(Timeslot));
         Array.Reverse(timeslots);
         foreach (Timeslot t in timeslots)
@@ -93,11 +103,8 @@ public class BarGraph : MonoBehaviour {
                 String key = t.ToString() + "-" + d.ToString();
                 RectTransform rect = bars[key].GetComponent<RectTransform>();
                 rect.sizeDelta = new Vector2(data[t][d], barFixedWidth);
-                rect.position = new Vector2(totalAudienceOffset, timeslotOffset);
                 totalAudienceOffset += data[t][d];
             }
-
-            timeslotOffset += barFixedWidth + padding;
         }
     }
 }
