@@ -9,11 +9,20 @@ public class LibraryTileController : MonoBehaviour
     public GameObject showTilePrefab;
 
     private List<GameObject> library = new List<GameObject>();
-    private float tileHeight = 60;
+
+    public List<GameObject> test = new List<GameObject>();
+
+    private void Start()
+    {
+        UpdateAvailableShows(test);
+    }
 
     public void UpdateAvailableShows(List<GameObject> shows)
     {
-        this.GetComponent<RectTransform>().sizeDelta = new Vector2(0, tileHeight * shows.Count);
+        float tileHeight = showTilePrefab.GetComponent<RectTransform>().sizeDelta.y;
+        float spacing = this.GetComponent<VerticalLayoutGroup>().spacing;
+
+        this.GetComponent<RectTransform>().sizeDelta = new Vector2(0, (tileHeight+spacing) * (shows.Count + 1));
         library.Clear();
 
         foreach(GameObject obj in shows) {
