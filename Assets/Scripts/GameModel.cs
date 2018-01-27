@@ -374,12 +374,10 @@ public class Show {
 		return (float)(concept.demographicAppeal[demographic] * peak * scale);
 	}
  
-
 	public string Name
 	{
 		get { return concept.name; }
 	}
-
 }
 
 public class DemographicTarget 
