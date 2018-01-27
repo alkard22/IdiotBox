@@ -87,7 +87,7 @@ public class BarGraph : MonoBehaviour {
         foreach (Timeslot t in timeslots)
         {
             int totalAudienceOffset = 0;
-            Dictionary<Demographic, int> viewers = GameState.current.viewers(t);
+            Dictionary<Demographic, int> viewers = GameState.current.Viewers(t);
             foreach (Demographic d in viewers.Keys)
             {
                 String key = t.ToString() + "-" + d.name;

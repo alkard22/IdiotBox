@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class RevenueView : MonoBehaviour
 {
@@ -22,6 +23,20 @@ public class RevenueView : MonoBehaviour
         }
 
         currentRevenue = value;
+    }
+
+    void Update()
+    {
+        Dictionary<Timeslot, int> revenueData = GameState.current.Revenue();
+        int sum = 0;
+        foreach (int r in revenueData.Values)
+        {
+            sum += r;
+        }
+        if (sum != currentRevenue)
+        {
+            UpdateRevenue(sum);
+        }
     }
 
 }

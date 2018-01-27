@@ -67,14 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e7897783adcb7478029ea3df689c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toddlers: {fileID: 2100000, guid: ff3921285f5923944b07d436193a983e, type: 2}
-  armchairAthletes: {fileID: 2100000, guid: cca684290bc2d2648a37dbf21d0ee9da, type: 2}
-  closetRomantics: {fileID: 2100000, guid: 269540b3986978040b62b0a9ed81abb9, type: 2}
-  adrenalineJunkies: {fileID: 2100000, guid: a29a252179e99404e9ef012febf83b89, type: 2}
+  kids: {fileID: 2100000, guid: cca684290bc2d2648a37dbf21d0ee9da, type: 2}
+  grownups: {fileID: 2100000, guid: 269540b3986978040b62b0a9ed81abb9, type: 2}
   graphImageObject: {fileID: 114669883104302542, guid: df8dcf95640a05a4fb8e0fd6f3235a48,
     type: 2}
-  barFixedWidth: 20
-  padding: 10
 --- !u!222 &222048066488897048
 CanvasRenderer:
   m_ObjectHideFlags: 1
