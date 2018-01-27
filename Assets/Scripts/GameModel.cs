@@ -275,12 +275,23 @@ public class GameModel
 	}
 
 	public void NextTurn() {
-
 		turn++;
 		balance += Revenue ().Aggregate (0, (sum, pair) => sum += pair.Value);
+
 		foreach(var item in showProgram) {
 			item.Value.weeksShowing++;
 		}
+
+		var newDevelopingConcepts = new Dictionary<ShowConcept, int> ();
+
+		foreach (var pair in developingConcepts) {
+			if (pair.Value <= 1)
+				availShows.Add (pair.Key.toShow());
+			else
+				newDevelopingConcepts [pair.Key] = pair.Value - 1;	
+		}
+
+		developingConcepts = newDevelopingConcepts;
 	}
 }
 
