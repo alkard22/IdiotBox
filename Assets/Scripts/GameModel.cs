@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
 public enum Timeslot
 {
 	Morning,
@@ -322,10 +323,13 @@ public class ShowConcept
 }
 
 public class Show {
+	static double PEAK_AUDIENCE_TURNS = 3;
+	static double PEAK_DECAY_TURNS = 5;
 
 	public ShowConcept concept;
 	public float peak;
 	public float longevity;
+	public int weeksShowing = 0;
 
 	public Show(ShowConcept concept, float peak, float longevity)
 	{
@@ -334,9 +338,22 @@ public class Show {
 		this.longevity = longevity;
 	}
 
-	public float Appeal(Demographic demographic) {
-		return concept.demographicAppeal[demographic] * peak;
+	public float Appeal(Demographic demographic) 
+	{
+		//Audience appeal rises from 0.4 to 1.0 of `peak` over PEAK_AUDIENCE_TURNS turns.
+		//Then sites at peak until PEAK_DECAY_TURNS 
+		//After the PEAK_DECAY_TURNS peak, it decays exponentially with a half-life of `longevity`
+		var fractionToPeak = weeksShowing/PEAK_AUDIENCE_TURNS;
+		var afterPeak = weeksShowing - PEAK_DECAY_TURNS;
+		var scale = (weeksShowing <= PEAK_AUDIENCE_TURNS) ?
+			0.4 * (1.0 - fractionToPeak) + fractionToPeak: 
+			(weeksShowing > PEAK_DECAY_TURNS) ?
+				1.0 / Math.Pow(2.0, afterPeak/longevity): 
+				1.0;
+		
+		return (float)(concept.demographicAppeal[demographic] * peak * scale);
 	}
+ 
 
 	public string Name
 	{
