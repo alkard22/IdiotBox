@@ -110,7 +110,31 @@ public class GameModel
 	);
 	static Show blackMirrorShow = blackMirrorConcept.toShow(false);
 
-	Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
+    static ShowConcept dieHeartConcept = new ShowConcept("Die Heart", "Romanitc reality show about finding love", 10000, 2,
+    new Dictionary<Demographic, int> {
+            { kidsDemographic, 1 },
+            { grownupsDemographic, 3 }
+    }
+);
+    static Show dieHeartShow = dieHeartConcept.toShow(false);
+
+    static ShowConcept cowTippingUSAConcept = new ShowConcept("Cow Tipping USA", "Cowboys getting rough with cows", 25000, 7,
+new Dictionary<Demographic, int> {
+            { kidsDemographic, 2 },
+            { grownupsDemographic, 3 }
+}
+);
+    static Show cowTippingUSAShow = cowTippingUSAConcept.toShow(false);
+
+    static ShowConcept FrankDeepConcept = new ShowConcept("Frank and the Terrors of the Deep", "Kid friendly show...promise!", 55000, 7,
+new Dictionary<Demographic, int> {
+            { kidsDemographic, 5 },
+            { grownupsDemographic, 2 }
+}
+);
+    static Show FrankDeepShow = FrankDeepConcept.toShow(false);
+
+    Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
 		new DemographicTarget (grownupsDemographic, 10), 2);
 
 	Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
@@ -183,7 +207,7 @@ public class GameModel
 
 	List<Show> initAvailShows()
 	{
-		return new List<Show> { blackMirrorShow };
+		return new List<Show> { blackMirrorShow, dieHeartShow, cowTippingUSAShow, FrankDeepShow};
 	}
 
 
