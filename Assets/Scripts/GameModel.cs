@@ -30,57 +30,54 @@ namespace AssemblyCSharp
 
 		}
 
-		List<Timeslot> initSlots()
+		static List<Timeslot> initSlots()
 		{
-			null;
+			return null;
 		}
 
-		List<Demographic> initPopulation()
+        static List<Demographic> initPopulation()
 		{
-			null;
+            return null;
 		}
 
-		List<ShowConcept> initConcepts()
+        static List<ShowConcept> initConcepts()
 		{
-			null;
-		}
-
-
-		List<ShowConcept> initAvailConcepts()
-		{
-			null;
+            return null;
 		}
 
 
-		Dictionary<Timeslot, Show> initProgram()
+        static List<ShowConcept> initAvailConcepts()
 		{
-			null;
-		}
-
-		List<Show> initAvailShows()
-		{
-			null;
+            return null;
 		}
 
 
-		Dictionary<Timeslot, Ad> initAdProgram()
+        static Dictionary<Timeslot, Show> initProgram()
 		{
-			null;
+            return null;
+		}
+
+        static List<Show> initAvailShows()
+		{
+            return null;
 		}
 
 
-		List<Ad> initAds()
+        static Dictionary<Timeslot, Ad> initAdProgram()
 		{
-			null;
-		}
-
-		List<Ad> initAvailAds()
-		{
-			null;
+            return null;
 		}
 
 
+        static List<Ad> initAds()
+		{
+            return null;
+		}
 
+        static List<Ad> initAvailAds()
+		{
+            return null;
+		}
 	}
 
 
