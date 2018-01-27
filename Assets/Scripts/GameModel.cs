@@ -30,13 +30,15 @@ public class GameModel
 
 	public Dictionary<Timeslot, Ad> adProgram;
 
-	public Dictionary<Demographic, int> viewers(Timeslot slot)
+
+	public Dictionary<Demographic, int> Viewers(Timeslot slot)
 	{
 		var viewerData = new Dictionary<Demographic, int>();
 
 		foreach(Demographic demographic in population)
 		{
-			viewerData [demographic] = 100;
+			var show = showProgram [slot];
+			viewerData[demographic] = (int) (show.Appeal(demographic) * demographic.timeslotPrefs[slot]);
 		}
 
 		return viewerData;
@@ -111,7 +113,7 @@ public class GameModel
 	static ShowConcept blackMirrorConcept = new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic, 0 },
-			{ grownupsDemographic, 10000 }
+			{ grownupsDemographic, 5 }
 		}
 	);
 	static Show blackMirrorShow = blackMirrorConcept.toShow(false);
@@ -213,8 +215,6 @@ public class GameModel
 		return new List<Ad>(allAds);
 	}
 
-
-
 }
 
 public class Demographic 
@@ -276,6 +276,9 @@ public class Show {
 		this.longevity = longevity;
 	}
 
+	public float Appeal(Demographic demographic) {
+		return concept.demographicAppeal[demographic] * peak;
+	}
 }
 
 public class DemographicTarget 
