@@ -135,19 +135,19 @@ new Dictionary<Demographic, int> {
     static Show FrankDeepShow = FrankDeepConcept.toShow(false);
 
     Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
-		new DemographicTarget (grownupsDemographic, 10), 2);
+		new DemographicTarget (grownupsDemographic, 10), 2, 2);
 
 	Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
-		new DemographicTarget(grownupsDemographic, 10), 3);
+		new DemographicTarget(grownupsDemographic, 10), 3, 1);
 
 	Ad transformers = new Ad ("Transformers", "Robots in disguise", 
-		new DemographicTarget (kidsDemographic, 10), 3);		
+		new DemographicTarget (kidsDemographic, 10), 3, 5);		
 
 	Ad myLittlePony = new Ad ("My Little Pony \ud83d\udc34", "♩ I love my little pony ♫", 
-		new DemographicTarget (kidsDemographic, 10), 3);	
+		new DemographicTarget (kidsDemographic, 10), 3, 2);	
 
 	Ad vegemite = new Ad ("Vegemite", "Aussie kids... are vegemite kids", 
-		new DemographicTarget (grownupsDemographic, 8), 4);
+		new DemographicTarget (grownupsDemographic, 8), 4, 1);
 
 	public GameModel (List<Demographic> population = null,
 		List<Show> availShows = null,
@@ -224,7 +224,7 @@ new Dictionary<Demographic, int> {
 
 	List<Ad> initAds()
 	{
-		return new List<Ad>() {vegemite};
+		return new List<Ad>() { nationalTiles, transformers, myLittlePony, francoCozzo, vegemite };
 	}
 
 	List<Ad> initAvailAds()
@@ -420,16 +420,18 @@ public class DemographicTarget
 
 public class Ad
 {
-	string name;
-	string flavor;
+	public string name;
+	public string flavor;
 	public DemographicTarget primary;
 	public int revenueOther;
+    public int duration;
 
-	public Ad(string name, string flavor, DemographicTarget primary, int revenueOther)
+	public Ad(string name, string flavor, DemographicTarget primary, int revenueOther, int duration)
 	{
 		this.primary = primary;
 		this.revenueOther = revenueOther;
 		this.name = name;
 		this.flavor = flavor;
+        this.duration = duration;
 	}
 }
