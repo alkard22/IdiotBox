@@ -133,15 +133,15 @@ public class GameModel
 		this.allConcepts = initConcepts();
 		this.allAds = initAds();
 
-		this.population = (population == null) ? population : initPopulation();
+		this.population = (population != null) ? population : initPopulation();
 
-		this.availShows = (availShows == null) ? availShows : initAvailShows();
-		this.availAds = (availAds == null) ? availAds : initAvailAds();
-		this.availConcepts = (availConcepts == null) ? availConcepts : initAvailConcepts();
-		this.developingConcepts = (developingConcepts == null) ? developingConcepts : new Dictionary<ShowConcept, int>();
+		this.availShows = (availShows != null) ? availShows : initAvailShows();
+		this.availAds = (availAds != null) ? availAds : initAvailAds();
+		this.availConcepts = (availConcepts != null) ? availConcepts : initAvailConcepts();
+		this.developingConcepts = (developingConcepts != null) ? developingConcepts : new Dictionary<ShowConcept, int>();
 
-		this.showProgram = (showProgram == null) ? showProgram : initProgram();
-		this.adProgram = (adProgram == null) ? adProgram: initAdProgram();
+		this.showProgram = (showProgram != null) ? showProgram : initProgram();
+		this.adProgram = (adProgram != null) ? adProgram: initAdProgram();
 
 		balance = 10000000;
 	}
@@ -242,14 +242,14 @@ public class GameModel
 
 	public GameModel Clone() {
 
-		var newPop = population.Select(
-				demographic =>
-					new Demographic(
-							demographic.name,
-							demographic.size,
-							new Dictionary<Timeslot, double>(demographic.timeslotPrefs))).ToList();
+        var newPop = population.Select(
+                demographic =>
+                    new Demographic(
+                            demographic.name,
+                            demographic.size,
+                            new Dictionary<Timeslot, double>(demographic.timeslotPrefs))).ToList();
 
-		var newAvailShows = availShows.Select (
+        var newAvailShows = availShows.Select (
 				show =>
 					new Show (
 						show.concept,
