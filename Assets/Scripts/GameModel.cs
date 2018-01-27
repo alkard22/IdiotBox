@@ -235,6 +235,13 @@ public class GameModel
 		}
 		return revenueData;
 	}
+
+	public void NextTurn() {
+
+		turn++;
+		balance += Revenue ().Aggregate (0, (sum, pair) => sum += pair.Value);
+
+	}
 }
 
 public class Demographic 
