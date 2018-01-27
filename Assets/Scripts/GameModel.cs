@@ -214,6 +214,15 @@ public class GameModel
 		return viewerData;
 	}
 
+	public Dictionary<Timeslot, int> Revenue()
+	{
+		var revenueData = new Dictionary<Timeslot, int>();
+
+		foreach (Timeslot slot in Enum.GetValues(typeof(Timeslot))) {
+			revenueData [slot] = 100;
+		}
+		return revenueData;
+	}
 }
 
 public class Demographic 
