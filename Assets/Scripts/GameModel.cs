@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum Timeslot
 {
@@ -31,11 +32,9 @@ public class GameModel
 
 	public int viewers(Timeslot slot)
 	{
-		var viewers = 0
-			population.ForEach
+		return 0;
 	}
-
-
+		
 	static Demographic kidsDemographic = new Demographic ("Kids", 10000,
 		new Dictionary<Timeslot, double>() {
 			{ Timeslot.Morning, 0.3 },
