@@ -14,7 +14,10 @@ public enum Timeslot
 
 public class GameModel
 {
-	int turn = 1;
+
+
+
+	public int turn = 1;
 
 	List<ShowConcept> allConcepts;
 	List<ShowConcept> availConcepts;
