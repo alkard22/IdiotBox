@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222475854478185970}
   - component: {fileID: 114442862399566710}
   m_Layer: 5
-  m_Name: ShowAvatarMini
+  m_Name: ShowAvatarMiniLibrayTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
