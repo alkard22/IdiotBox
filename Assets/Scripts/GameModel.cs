@@ -30,9 +30,16 @@ public class GameModel
 
 	public Dictionary<Timeslot, Ad> adProgram;
 
-	public int viewers(Timeslot slot)
+	public Dictionary<Demographic, int> viewers(Timeslot slot)
 	{
-		return 0;
+		var viewerData = new Dictionary<Demographic, int>();
+
+		foreach(Demographic demographic in population)
+		{
+			viewerData [demographic] = 100;
+		}
+
+		return viewerData;
 	}
 		
 	static Demographic kidsDemographic = new Demographic ("Kids", 10000,
