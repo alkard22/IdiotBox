@@ -7,76 +7,114 @@ namespace AssemblyCSharp
 	{
 		int turn = 1;
 
-		List<ShowConcept> allConcepts = initConcepts();
-		List<ShowConcept> availConcepts = initAvailConcepts();
+		List<ShowConcept> allConcepts;
+		List<ShowConcept> availConcepts;
 		Dictionary<ShowConcept, int> developingConcepts = new Dictionary<ShowConcept, int>();
 
-		List<Ad> allAds = initAds();
-		List<Ad> availAds = initAvailAds();
+		List<Ad> allAds;
+		List<Ad> availAds;
 
-		List<Demographic> population = initPopulation();
+		List<Demographic> population;
 
 
-		List<Timeslot> slots = initSlots();
+		Demographic kidsDemographic = new Demographic ("Kids", 10000,
+			new Dictionary<Timeslot, double>() {
+				{ Timeslot.Morning, 0.3 },
+				{ Timeslot.Afternoon, 0.5 },
+				{ Timeslot.PrimeTime, 0.2 },
+				{ Timeslot.Night, 0.1 }
+			}
+		);
 
-		List<Show> availShows = initAvailShows();
+		Demographic grownupsDemographic = new Demographic("Grownups", 20000, 
+			new Dictionary<Timeslot, double>() {
+				{Timeslot.Morning, 0.3},
+				{Timeslot.Afternoon, 0.2},
+				{Timeslot.PrimeTime, 0.6},
+				{Timeslot.Night, 0.4}
+			}
+		);
 
-		Dictionary<Timeslot, Show> showProgram = initProgram();
 
-		Dictionary<Timeslot, Ad> adProgram = initAdProgram();
+
+		List<Show> availShows;
+
+		Dictionary<Timeslot, Show> showProgram;
+
+		Dictionary<Timeslot, Ad> adProgram;
 
 		public GameModel ()
 		{
+			allConcepts = initConcepts();
+			availConcepts = initAvailConcepts();
+			developingConcepts = new Dictionary<ShowConcept, int>();
 
+			allAds = initAds();
+			availAds = initAvailAds();
+
+			population = initPopulation();
+
+
+			availShows = initAvailShows();
+
+			showProgram = initProgram();
+
+			adProgram = initAdProgram();
 		}
 
-		List<Timeslot> initSlots()
-		{
-			null;
-		}
 
 		List<Demographic> initPopulation()
 		{
-			null;
+			return new List<Demographic> { 
+				kidsDemographic,
+				grownupsDemographic,
+			};
 		}
 
 		List<ShowConcept> initConcepts()
 		{
-			null;
+			return new List<ShowConcept> { 
+				new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
+					new Dictionary<Demographic, int> {
+						{ kidsDemographic, 0 },
+						{ grownupsDemographic, 10000 }
+					}
+				)
+			};
 		}
 
 
 		List<ShowConcept> initAvailConcepts()
 		{
-			null;
+			return null;
 		}
 
 
 		Dictionary<Timeslot, Show> initProgram()
 		{
-			null;
+			return null;
 		}
 
 		List<Show> initAvailShows()
 		{
-			null;
+			return null;
 		}
 
 
 		Dictionary<Timeslot, Ad> initAdProgram()
 		{
-			null;
+			return null;
 		}
 
 
 		List<Ad> initAds()
 		{
-			null;
+			return null;
 		}
 
 		List<Ad> initAvailAds()
 		{
-			null;
+			return null;
 		}
 
 
@@ -84,24 +122,21 @@ namespace AssemblyCSharp
 	}
 
 
-	public class Timeslot 
+	public enum Timeslot
 	{
-		public string name;
-
-		public Timeslot(string name)
-		{
-			this.name = name;	
-		}
-			
-	}
+		Morning,
+		Afternoon,
+		PrimeTime,
+		Night
+	};
 
 	public class Demographic 
 	{
 		public string name;
 		public int size; 
-		public Dictionary<Timeslot, float> timeslotPrefs;
+		public Dictionary<Timeslot, double> timeslotPrefs;
 
-		public Demographic(string name, int size, Dictionary<Timeslot, float> timeslotPrefs)
+		public Demographic(string name, int size, Dictionary<Timeslot, double> timeslotPrefs)
 		{
 			this.name = name;
 			this.size = size;
@@ -119,7 +154,7 @@ namespace AssemblyCSharp
 		public int duration;
 
 
-		public ShowConcept(string name, String flavor, Dictionary<Demographic, int> demographicAppeal, int price, int duration)
+		public ShowConcept(string name, String flavor, int price, int duration, Dictionary<Demographic, int> demographicAppeal)
 		{
 			this.name = name;
 			this.flavor = flavor;
@@ -127,7 +162,7 @@ namespace AssemblyCSharp
 			this.price = price;
 			this.duration = duration;
 		}
-			
+
 	}
 
 	public class Show {
@@ -147,8 +182,8 @@ namespace AssemblyCSharp
 
 	public class DemographicTarget 
 	{
-		Demographic target;
-		int revenue;
+		public Demographic target;
+		public int revenue;
 
 		public DemographicTarget(Demographic target, int revenue) 	
 		{
@@ -162,12 +197,12 @@ namespace AssemblyCSharp
 		string name;
 		string flavor;
 		public DemographicTarget primary;
-		public DemographicTarget other;
+		public int revenueOther;
 
 		public Ad(DemographicTarget primary, int revenueOther)
 		{
 			this.primary = primary;
-			this.other = other;
+			this.revenueOther = revenueOther;
 		}
 	}
 
