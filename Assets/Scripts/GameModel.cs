@@ -423,13 +423,16 @@ public class ShowConcept
 		this.developmentTime = developmentTime;
 	}
 
+	//peak varies between 8 - 52 (+/-7)
+	//longevity varies between 4 - 18 (+/-3)
+
 	public Show toShow(bool noise = true)
 	{
-		var random1 = noise ? UnityEngine.Random.Range(-10.0f, 10.0f) : 0.0f;
+		var random1 = noise ? UnityEngine.Random.Range(-7.0f, 7.0f) : 0.0f;
 		var peak = 0.01 * this.price + this.developmentTime + random1;
 
-		var random2 = noise ? UnityEngine.Random.Range(-10.0f, 10.0f) : 0.0f;
-		var longevity = 0.01f * this.price + this.developmentTime + random2;
+		var random2 = noise ? UnityEngine.Random.Range(-3.0f, 3.0f) : 0.0f;
+		var longevity = 0.003f * this.price + 0.6f * this.developmentTime + random2;
 
 		return new Show(this, (int) peak, (int) longevity);
 	}
