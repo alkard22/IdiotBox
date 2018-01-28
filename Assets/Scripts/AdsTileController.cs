@@ -7,10 +7,21 @@ public class AdsTileController : MonoBehaviour
     public GameObject showTilePrefab;
     private List<GameObject> library = new List<GameObject>();
 
+    public TimeSlotSlector slotSelector;
+    private Ad selectedAd;
+
     private void OnEnable()
     {
         List<Ad> ads = GameState.current.availAds;
         UpdateAvailableAds(ads);
+    }
+
+    private void OnDisable()
+    {
+        for(int i = 0; i < library.Count; i++) {
+            Destroy(library[i]);
+        }
+        library.Clear();
     }
 
     public void UpdateAvailableAds(List<Ad> ads)
@@ -19,7 +30,6 @@ public class AdsTileController : MonoBehaviour
         float spacing = this.GetComponent<VerticalLayoutGroup>().spacing;
 
         this.GetComponent<RectTransform>().sizeDelta = new Vector2(0, (tileHeight + spacing) * (ads.Count + 1));
-        library.Clear();
 
         foreach (Ad a in ads)
         {
@@ -46,6 +56,13 @@ public class AdsTileController : MonoBehaviour
             }
             obj.GetComponent<Image>().color = c;
         }
+        selectedAd = tile.GetComponent<AdTileView>().GetAdData();
     }
+
+    public void SelectAdToAir()
+    {
+        GameState.next.scheduleAd(slotSelector.GetSelectedSlot().GetComponent<TimeSlot>().slot, selectedAd);
+    }
+
 
 }

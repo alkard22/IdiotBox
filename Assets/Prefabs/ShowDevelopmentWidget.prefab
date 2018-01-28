@@ -1081,6 +1081,7 @@ MonoBehaviour:
   detailsView: {fileID: 114439440124351644}
   showTilePrefab: {fileID: 1454395812446476, guid: 04b7dfc6cab380d48a741bf5cd1ce860,
     type: 2}
+  slotSelector: {fileID: 0}
 --- !u!114 &114574941068947574
 MonoBehaviour:
   m_ObjectHideFlags: 1

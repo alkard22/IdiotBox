@@ -8,6 +8,7 @@ public class AdTileView : MonoBehaviour
     public Text primary;
     public Text secondary;
     public Text runDuration;
+    private Ad ad;
 
     public void UpdateTileDetails (Ad ad)
     {
@@ -18,7 +19,13 @@ public class AdTileView : MonoBehaviour
             DemographicTarget target = ad.primary;
             primary.text = "$" + target.revenue +" per view for " + target.target.name;
             secondary.text = "$" + ad.revenueOther + " per view for other demographics";
+            this.ad = ad;
         }
+    }
+
+    public Ad GetAdData()
+    {
+        return ad;
     }
 
     public void TileSelected()

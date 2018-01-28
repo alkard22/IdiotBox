@@ -58,9 +58,7 @@ public class LibraryTileController : MonoBehaviour
 
     public void SelectShowToAir()
     {
-        //slotSelector.GetSelectedSlot().GetComponent<TimeSlot>().slot;
-        ////selectedShow
-        //GameState.next.
+        GameState.next.scheduleShow(slotSelector.GetSelectedSlot().GetComponent<TimeSlot>().slot, selectedShow);
     }
 
 }
