@@ -33,7 +33,7 @@ public class GameModel
 
 	public int balance;
 
-	static Demographic kidsDemographic = new Demographic ("Kids", 10000,
+	static Demographic kidsDemographic = new Demographic ("Kids", 20000,
 		new Dictionary<Timeslot, double>() {
 			{ Timeslot.Morning, 0.3 },
 			{ Timeslot.Afternoon, 0.5 },
@@ -44,7 +44,7 @@ public class GameModel
 
 	static Demographic armchairAthleteDemographic = new Demographic ("Armchair Athletes", 30000,
 		new Dictionary<Timeslot, double> () {
-			{ Timeslot.Morning, 0.1 },
+			{ Timeslot.Morning, 0.15 },
 			{ Timeslot.Afternoon, 0.3 },
 			{ Timeslot.PrimeTime, 0.5 },
 			{ Timeslot.Night, 0.4 }
@@ -53,7 +53,7 @@ public class GameModel
 
 	static Demographic hopelessRomanticDemographic = new Demographic ("Hopeless Romantics", 20000,
 		new Dictionary<Timeslot, double> () {
-			{ Timeslot.Morning, 0.1 },
+			{ Timeslot.Morning, 0.15 },
 			{ Timeslot.Afternoon, 0.2 },
 			{ Timeslot.PrimeTime, 0.6 },
 			{ Timeslot.Night, 0.3 }
