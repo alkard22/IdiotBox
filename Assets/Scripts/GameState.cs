@@ -7,8 +7,10 @@ public class GameState  {
 
 	public static void NextTurn()
 	{
-		next.NextTurn ();
-		current = next;
-		next = current.Clone ();
+		if (current.turn != 52) {
+			next.NextTurn ();
+			current = next;
+			next = current.Clone ();
+		}
 	}
 }
