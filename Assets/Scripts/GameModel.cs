@@ -219,7 +219,22 @@ new Dictionary<Demographic, int> {
 		this.balance = balance;
 	}
 
-	Dictionary<Demographic, int> ParseDemographicAppeal(string input)
+    public void scheduleShow(Timeslot timeslot, Show show)
+    {
+        showProgram[timeslot] = show;
+    }
+
+    public void scheduleAd(Timeslot timeslot, Ad ad)
+    {
+        adProgram[timeslot] = ad;
+    }
+
+    public void developConcept(ShowConcept concept)
+    {
+        developingConcepts.Add(concept, concept.developmentTime);
+    }
+
+    Dictionary<Demographic, int> ParseDemographicAppeal(string input)
 	{
 		var inputPhrases = input.Split (',');
 		var output = new Dictionary<Demographic, int> ();
