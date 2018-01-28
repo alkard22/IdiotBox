@@ -258,7 +258,9 @@ new Dictionary<Demographic, int> {
 	public List<ShowConcept> LoadAllShowConceptsFromFile(string filename)
 	{
 		var showConcepts = new List<ShowConcept> ();
-		var reader = new StreamReader (filename);
+        TextAsset asset = Resources.Load(filename) as TextAsset;
+        Stream s = new MemoryStream(asset.bytes);
+        var reader = new StreamReader (s);
 		string line;
 
 		while ((line = reader.ReadLine ()) != null) {
@@ -272,7 +274,9 @@ new Dictionary<Demographic, int> {
 	public List<Show> LoadShowsFromFile(string filename)
 	{
 		var shows = new List<Show> ();
-		var reader = new StreamReader (filename);
+        TextAsset asset = Resources.Load(filename) as TextAsset;
+        Stream s = new MemoryStream(asset.bytes);
+        var reader = new StreamReader (s);
 		string line;
 
 		while ((line = reader.ReadLine ()) != null) {
@@ -298,7 +302,7 @@ new Dictionary<Demographic, int> {
 
 	List<ShowConcept> initConcepts()
 	{
-		return LoadAllShowConceptsFromFile ("Assets/Data/all-show-concepts.csv");
+		return LoadAllShowConceptsFromFile ("all-show-concepts");
 	}
 
 
@@ -320,7 +324,7 @@ new Dictionary<Demographic, int> {
 
 	List<Show> initAvailShows()
 	{
-		return LoadShowsFromFile ("Assets/Data/avail-shows.csv");
+		return LoadShowsFromFile ("avail-shows");
 	}
 
 
