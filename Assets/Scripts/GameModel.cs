@@ -249,6 +249,11 @@ new Dictionary<Demographic, int> {
 		return output;
 	}
 
+	ShowConcept ParseShowConcept(string[] fields)
+	{
+		return new ShowConcept(fields[0], fields[1],int.Parse(fields[2]), int.Parse(fields[3]), ParseDemographicAppeal(fields[4]));
+	}
+
 	public List<ShowConcept> LoadAllShowConceptsFromFile(string filename)
 	{
 		var showConcepts = new List<ShowConcept> ();
@@ -257,12 +262,27 @@ new Dictionary<Demographic, int> {
 
 		while ((line = reader.ReadLine ()) != null) {
 			var fields = line.Split ('|');
-			var concept = new ShowConcept(fields[0], fields[1],int.Parse(fields[2]), int.Parse(fields[3]), ParseDemographicAppeal(fields[4]));
-
-			showConcepts.Add(concept);
+			showConcepts.Add(ParseShowConcept(fields));
 		}
 
 		return showConcepts;
+	}
+
+	public List<Show> LoadShowsFromFile(string filename)
+	{
+		var shows = new List<Show> ();
+		var reader = new StreamReader (filename);
+		string line;
+
+		while ((line = reader.ReadLine ()) != null) {
+			var fields = line.Split ('|');
+			var concept = ParseShowConcept (fields);
+			var show = new Show (concept, float.Parse (fields [5]), float.Parse (fields [6]));
+
+			shows.Add (show);	
+		}
+
+		return shows;
 	}
 
 	List<Demographic> initPopulation()
@@ -277,7 +297,7 @@ new Dictionary<Demographic, int> {
 
 	List<ShowConcept> initConcepts()
 	{
-		return LoadAllShowConceptsFromFile ("Assets/Data/all-shows.csv");
+		return LoadAllShowConceptsFromFile ("Assets/Data/all-show-concepts.csv");
 	}
 
 
@@ -299,7 +319,7 @@ new Dictionary<Demographic, int> {
 
 	List<Show> initAvailShows()
 	{
-		return new List<Show> { blackMirrorShow, dieHeartShow, cowTippingUSAShow, FrankDeepShow};
+		return LoadShowsFromFile ("Assets/Data/avail-shows.csv");
 	}
 
 
