@@ -6,6 +6,9 @@ public class LibraryTileController : MonoBehaviour
 {
     public ShowDetailsView detailsView;
     public GameObject showTilePrefab;
+    public TimeSlotSlector slotSelector;
+
+    private Show selectedShow;
     private List<GameObject> library = new List<GameObject>();
 
     private void OnEnable()
@@ -50,6 +53,14 @@ public class LibraryTileController : MonoBehaviour
             obj.GetComponent<Image>().color = c;
         }
         detailsView.UpdateShowDetailsPanel(tile.GetComponent<ShowTileView>().GetShowData());
+        selectedShow = tile.GetComponent<ShowTileView>().GetShowData();
+    }
+
+    public void SelectShowToAir()
+    {
+        //slotSelector.GetSelectedSlot().GetComponent<TimeSlot>().slot;
+        ////selectedShow
+        //GameState.next.
     }
 
 }
