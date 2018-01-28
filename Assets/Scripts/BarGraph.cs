@@ -41,7 +41,7 @@ public class BarGraph : MonoBehaviour {
     public GameObject spacer;
 
     private int barFixedWidth = 30;
-    private int barUnitSize = 10;
+    private int barUnitSize = 5;
 
     private Data data = new Data();
     private Dictionary<String, Image> bars = new Dictionary<String, Image>();
