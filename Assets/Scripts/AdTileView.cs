@@ -7,12 +7,14 @@ public class AdTileView : MonoBehaviour
     public Text adName;
     public Text primary;
     public Text secondary;
+    public Text runDuration;
 
     public void UpdateTileDetails (Ad ad)
     {
         if(ad.name != null) {
             adName.text = ad.name;
             avatar.title = ad.name;
+            runDuration.text = "" + ad.duration;
             DemographicTarget target = ad.primary;
             primary.text = "$" + target.revenue +" per view for " + target.target.name;
             secondary.text = "$" + ad.revenueOther + " per view for other demographics";

@@ -326,6 +326,7 @@ MonoBehaviour:
   adName: {fileID: 114635860728943594}
   primary: {fileID: 114663474457061056}
   secondary: {fileID: 114034897813701240}
+  runDuration: {fileID: 114456931893926384}
 --- !u!114 &114590567083605846
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -32,16 +32,7 @@ public class RevenueView : MonoBehaviour
 
     void Update()
     {
-        Dictionary<Timeslot, int> revenueData = GameState.current.Revenue();
-        int sum = 0;
-        foreach (int r in revenueData.Values)
-        {
-            sum += r;
-        }
-        if (sum != currentRevenue)
-        {
-            UpdateRevenue(sum);
-        }
+        UpdateRevenue(GameState.current.balance / 100);
     }
 
 }

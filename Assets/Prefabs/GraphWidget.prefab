@@ -73,6 +73,10 @@ MonoBehaviour:
     type: 2}
   avatarPrefab: {fileID: 114442862399566710, guid: 4ea44ad4e9b02a449a6fe3a031208894,
     type: 2}
+  adAvatarPrefab: {fileID: 114442862399566710, guid: 844a63ea45085864ea6f51f9c8f5babc,
+    type: 2}
+  timeslotPrefab: {fileID: 114817307155045120, guid: b30fe0d9ea2f6c14f9e70383281e44c1,
+    type: 2}
   spacer: {fileID: 1306434014159142, guid: 981db22583ae6b04085fab4bb0c574c4, type: 2}
 --- !u!222 &222048066488897048
 CanvasRenderer:
