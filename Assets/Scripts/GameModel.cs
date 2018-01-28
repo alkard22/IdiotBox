@@ -14,10 +14,7 @@ public enum Timeslot
 
 public class GameModel
 {
-
-
-
-	public int turn = 1;
+	public int turn;
 
 	List<ShowConcept> allConcepts;
 	List<ShowConcept> availConcepts;
@@ -155,9 +152,11 @@ new Dictionary<Demographic, int> {
 		List<ShowConcept> availConcepts = null,
 		Dictionary<ShowConcept, int> developingConcepts = null,
 		Dictionary<Timeslot, Show> showProgram = null,
-		Dictionary<Timeslot, Ad> adProgram = null)
+		Dictionary<Timeslot, Ad> adProgram = null,
+		int turn = 1)
 	{
 		this.population = (population != null) ? population : initPopulation();
+		this.turn = turn;
 
 		this.allConcepts = initConcepts();
 		this.allAds = initAds();
@@ -316,10 +315,11 @@ new Dictionary<Demographic, int> {
 			).ToDictionary(pair => pair.Key, pair => pair.Value);
 
 		return new GameModel (new List<Demographic>(population), newAvailShows, new List<Ad> (availAds), new List<ShowConcept> (availConcepts),
-				new Dictionary<ShowConcept, int> (developingConcepts), newShowProgram, new Dictionary<Timeslot, Ad> (adProgram));
+				new Dictionary<ShowConcept, int> (developingConcepts), newShowProgram, new Dictionary<Timeslot, Ad> (adProgram), turn);
 	}
 
 	public void NextTurn() {
+		Debug.Log (turn);
 		turn++;
 		balance += Revenue ().Aggregate (0, (sum, pair) => sum += pair.Value);
 
