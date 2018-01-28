@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -403,7 +404,6 @@ new Dictionary<Demographic, int> {
 	}
 
 	public void NextTurn() {
-		
 		turn++;
 		balance += Revenue ().Aggregate (0, (sum, pair) => sum += pair.Value);
 		foreach(var item in showProgram) {
@@ -419,6 +419,19 @@ new Dictionary<Demographic, int> {
 				newDevelopingConcepts [pair.Key] = pair.Value - 1;	
 		}
 
+		var newAds = new Dictionary<Timeslot, Ad> (adProgram);
+
+		foreach (var pair in adProgram) {
+			if (pair.Value != null && pair.Value.weeksRemaining > 1) {
+				pair.Value.weeksRemaining = pair.Value.weeksRemaining - 1;
+				newAds [pair.Key] = pair.Value;
+			}
+			else
+				newAds [pair.Key] = null;
+					
+		}
+
+		adProgram = newAds;
 		developingConcepts = newDevelopingConcepts;
 	}
 }
@@ -549,7 +562,7 @@ public class Ad
 	public string flavor;
 	public DemographicTarget primary;
 	public int revenueOther;
-    public int duration;
+    public int weeksRemaining;
 
 	public Ad(string name, string flavor, DemographicTarget primary, int revenueOther, int duration)
 	{
@@ -557,6 +570,6 @@ public class Ad
 		this.revenueOther = revenueOther;
 		this.name = name;
 		this.flavor = flavor;
-        this.duration = duration;
+        this.weeksRemaining = duration;
 	}
 }

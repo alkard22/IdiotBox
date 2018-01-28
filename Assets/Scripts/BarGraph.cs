@@ -121,8 +121,13 @@ public class BarGraph : MonoBehaviour {
         {
             int totalAudienceOffset = 0;
             
-            adAvatars[t].title = GameState.current.adProgram[t].name;
-            adAvatars[t].GenerateAvatar();
+			if (GameState.current.adProgram [t] != null) {
+				adAvatars [t].title = GameState.current.adProgram [t].name;
+			} else
+				adAvatars [t].title = "";
+					
+           	adAvatars[t].GenerateAvatar();
+
 
             Dictionary<Demographic, int> viewers = GameState.current.Viewers(t);
             avatars[t].title = GameState.current.showProgram[t].concept.name;

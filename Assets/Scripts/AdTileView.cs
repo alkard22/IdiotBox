@@ -15,7 +15,7 @@ public class AdTileView : MonoBehaviour
         if(ad.name != null) {
             adName.text = ad.name;
             avatar.title = ad.name;
-            runDuration.text = "" + ad.duration;
+            runDuration.text = "" + ad.weeksRemaining;
             DemographicTarget target = ad.primary;
             primary.text = "$" + target.revenue +" per view for " + target.target.name;
             secondary.text = "$" + ad.revenueOther + " per view for other demographics";
