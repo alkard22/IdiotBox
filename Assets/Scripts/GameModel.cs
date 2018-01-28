@@ -69,11 +69,22 @@ public class GameModel
 		}
 	);
 
+	//Show Costs
+	//V Cheap      500
+	//Cheap      1000
+	//Medium     2000
+	//Expensive  4000
+
+	//Show time to develop
+	//Short        3
+	//Medium       6
+	//Long         12
+
 	static ShowConcept morningShowConcept = new ShowConcept(
 		"morning show", 
 		"talking heads", 
-		100, 
-		2, 
+		1000, 
+		6, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  1},
 			{ hopelessRomanticDemographic, 5 },
@@ -86,8 +97,8 @@ public class GameModel
 	static ShowConcept cartoonConcept = new ShowConcept(
 		"roadrunner", 
 		"The cyote must always lose", 
-		150, 
-		3, 
+		2000, 
+		6, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  5},
 			{ armchairAthleteDemographic, 1 },
@@ -97,11 +108,12 @@ public class GameModel
 	);
 	static Show cartoonShow = cartoonConcept.toShow(false);
 
+
 	static ShowConcept newsConcept = new ShowConcept(
 		"news", 
 		"Sometimes it's even balanced", 
-		250, 
-		5, 
+		2500, 
+		12, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  2},
 			{ armchairAthleteDemographic, 3 },
@@ -114,8 +126,8 @@ public class GameModel
 	static ShowConcept fishtankConcept = new ShowConcept(
 		"fishtank", 
 		"Think Finding Nemo!", 
-		20, 
-		1, 
+		500, 
+		3, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  2},
 			{ armchairAthleteDemographic,  1},
@@ -125,7 +137,7 @@ public class GameModel
 	);
 	static Show fishtankShow = fishtankConcept.toShow(false);
 
-	static ShowConcept blackMirrorConcept = new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
+	static ShowConcept blackMirrorConcept = new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 4000, 12, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic, 0 },
 			{ armchairAthleteDemographic,  1},
@@ -135,7 +147,7 @@ public class GameModel
 	);
 	static Show blackMirrorShow = blackMirrorConcept.toShow(false);
 
-    static ShowConcept dieHeartConcept = new ShowConcept("Die Heart", "Romanitc reality show about finding love", 10000, 2,
+    static ShowConcept dieHeartConcept = new ShowConcept("Die Heart", "Romanitc reality show about finding love", 1000, 6,
     new Dictionary<Demographic, int> {
             { kidsDemographic, 1 },
 			{ armchairAthleteDemographic,  1},
@@ -145,7 +157,7 @@ public class GameModel
 );
     static Show dieHeartShow = dieHeartConcept.toShow(false);
 
-    static ShowConcept cowTippingUSAConcept = new ShowConcept("Cow Tipping USA", "Cowboys getting rough with cows", 25000, 7,
+    static ShowConcept cowTippingUSAConcept = new ShowConcept("Cow Tipping USA", "Cowboys getting rough with cows", 1000, 4,
 new Dictionary<Demographic, int> {
             { kidsDemographic, 2 },
 			{ armchairAthleteDemographic,  1},
@@ -155,7 +167,7 @@ new Dictionary<Demographic, int> {
 );
     static Show cowTippingUSAShow = cowTippingUSAConcept.toShow(false);
 
-    static ShowConcept FrankDeepConcept = new ShowConcept("Frank and the Terrors of the Deep", "Kid friendly show...promise!", 55000, 7,
+    static ShowConcept FrankDeepConcept = new ShowConcept("Frank and the Terrors of the Deep", "Kid friendly show...promise!", 500, 5,
 new Dictionary<Demographic, int> {
             { kidsDemographic, 5 },
 			{ armchairAthleteDemographic,  1},
@@ -420,6 +432,21 @@ public class ShowConcept
 		var longevity = 0.01f * this.price + this.duration + random2;
 
 		return new Show(this, (int) peak, (int) longevity);
+	}
+
+	public int expectedRating()
+	{
+		var n = 0.001 * this.price + this.duration * 0.2;
+		if (n <= 1.0)
+			return 1;
+		else if (new <= 2.0)
+			return 2;
+		else if (new <= 3.0)
+			return 3;
+		else if (new <= 4.0)
+			return 4;
+		else 
+			return 5;
 	}
 
 }
