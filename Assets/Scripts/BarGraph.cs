@@ -30,7 +30,9 @@ public class BarGraph : MonoBehaviour {
 
 
     public Material kids;
-    public Material grownups;
+    public Material armchairAthletes;
+	public Material hopelessRomantics;
+	public Material conspiracyTheorists;
 
     public Image graphImagePrefab;
     public ShowAvatar avatarPrefab;
@@ -50,7 +52,9 @@ public class BarGraph : MonoBehaviour {
     {
         Dictionary<String, Material> colors = new Dictionary<String, Material>();
         colors.Add("Kids", kids);
-        colors.Add("Grownups", grownups);
+		colors.Add("Armchair Athletes", armchairAthletes);
+		colors.Add("Hopeless Romantics", hopelessRomantics);
+        colors.Add("Conspiracy Theorists", conspiracyTheorists);
 
         foreach (Timeslot t in Enum.GetValues(typeof(Timeslot)))
         {

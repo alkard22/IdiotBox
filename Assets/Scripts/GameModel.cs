@@ -42,12 +42,30 @@ public class GameModel
 		}
 	);
 
-	static Demographic grownupsDemographic = new Demographic("Grownups", 20000, 
+	static Demographic armchairAthleteDemographic = new Demographic ("Armchair Athletes", 30000,
+		new Dictionary<Timeslot, double> () {
+			{ Timeslot.Morning, 0.1 },
+			{ Timeslot.Afternoon, 0.3 },
+			{ Timeslot.PrimeTime, 0.5 },
+			{ Timeslot.Night, 0.4 }
+		}
+	);
+
+	static Demographic hopelessRomanticDemographic = new Demographic ("Hopeless Romantics", 20000,
+		new Dictionary<Timeslot, double> () {
+			{ Timeslot.Morning, 0.1 },
+			{ Timeslot.Afternoon, 0.2 },
+			{ Timeslot.PrimeTime, 0.6 },
+			{ Timeslot.Night, 0.3 }
+		}
+	);
+
+	static Demographic conspiracyTheoristsDemographic = new Demographic("Conspiracy Theorists", 50000, 
 		new Dictionary<Timeslot, double>() {
-			{Timeslot.Morning, 0.3},
-			{Timeslot.Afternoon, 0.2},
-			{Timeslot.PrimeTime, 0.6},
-			{Timeslot.Night, 0.4}
+			{Timeslot.Morning, 0.2},
+			{Timeslot.Afternoon, 0.4},
+			{Timeslot.PrimeTime, 0.4},
+			{Timeslot.Night, 0.7}
 		}
 	);
 
@@ -58,7 +76,9 @@ public class GameModel
 		2, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  1},
-			{ grownupsDemographic, 5 }
+			{ hopelessRomanticDemographic, 5 },
+			{ armchairAthleteDemographic, 2 },
+			{ conspiracyTheoristsDemographic, 2 }
 		}
 	);
 	static Show morningShow = morningShowConcept.toShow(false);
@@ -70,7 +90,9 @@ public class GameModel
 		3, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  5},
-			{ grownupsDemographic, 1 }
+			{ armchairAthleteDemographic, 1 },
+			{ hopelessRomanticDemographic, 1 },
+			{ conspiracyTheoristsDemographic, 0 }
 		}
 	);
 	static Show cartoonShow = cartoonConcept.toShow(false);
@@ -82,7 +104,9 @@ public class GameModel
 		5, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  2},
-			{ grownupsDemographic, 5 }
+			{ armchairAthleteDemographic, 3 },
+			{ hopelessRomanticDemographic, 3 },
+			{ conspiracyTheoristsDemographic, 3 }
 		}
 	);
 	static Show newsShow = newsConcept.toShow(false);
@@ -94,7 +118,9 @@ public class GameModel
 		1, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic,  2},
-			{ grownupsDemographic, 2 }
+			{ armchairAthleteDemographic,  1},
+			{ hopelessRomanticDemographic,  2},
+			{ conspiracyTheoristsDemographic, 3 }
 		}
 	);
 	static Show fishtankShow = fishtankConcept.toShow(false);
@@ -102,7 +128,9 @@ public class GameModel
 	static ShowConcept blackMirrorConcept = new ShowConcept ("BlackMirror", "Scary neo-noir scifi", 100000, 5, 
 		new Dictionary<Demographic, int> {
 			{ kidsDemographic, 0 },
-			{ grownupsDemographic, 5 }
+			{ armchairAthleteDemographic,  1},
+			{ hopelessRomanticDemographic,  2},
+			{ conspiracyTheoristsDemographic, 5 }
 		}
 	);
 	static Show blackMirrorShow = blackMirrorConcept.toShow(false);
@@ -110,7 +138,9 @@ public class GameModel
     static ShowConcept dieHeartConcept = new ShowConcept("Die Heart", "Romanitc reality show about finding love", 10000, 2,
     new Dictionary<Demographic, int> {
             { kidsDemographic, 1 },
-            { grownupsDemographic, 3 }
+			{ armchairAthleteDemographic,  1},
+			{ hopelessRomanticDemographic,  2},
+            { conspiracyTheoristsDemographic, 3 }
     }
 );
     static Show dieHeartShow = dieHeartConcept.toShow(false);
@@ -118,7 +148,9 @@ public class GameModel
     static ShowConcept cowTippingUSAConcept = new ShowConcept("Cow Tipping USA", "Cowboys getting rough with cows", 25000, 7,
 new Dictionary<Demographic, int> {
             { kidsDemographic, 2 },
-            { grownupsDemographic, 3 }
+			{ armchairAthleteDemographic,  1},
+			{ hopelessRomanticDemographic,  2},
+            { conspiracyTheoristsDemographic, 3 }
 }
 );
     static Show cowTippingUSAShow = cowTippingUSAConcept.toShow(false);
@@ -126,25 +158,27 @@ new Dictionary<Demographic, int> {
     static ShowConcept FrankDeepConcept = new ShowConcept("Frank and the Terrors of the Deep", "Kid friendly show...promise!", 55000, 7,
 new Dictionary<Demographic, int> {
             { kidsDemographic, 5 },
-            { grownupsDemographic, 2 }
+			{ armchairAthleteDemographic,  1},
+			{ hopelessRomanticDemographic,  2},
+            { conspiracyTheoristsDemographic, 2 }
 }
 );
     static Show FrankDeepShow = FrankDeepConcept.toShow(false);
 
     Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
-		new DemographicTarget (grownupsDemographic, 10), 2, 2);
+		new DemographicTarget (hopelessRomanticDemographic, 10), 2, 2);
 
 	Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
-		new DemographicTarget(grownupsDemographic, 10), 3, 1);
+		new DemographicTarget(armchairAthleteDemographic, 10), 3, 1);
 
 	Ad transformers = new Ad ("Transformers", "Robots in disguise", 
 		new DemographicTarget (kidsDemographic, 10), 3, 5);		
 
-	Ad myLittlePony = new Ad ("My Little Pony \ud83d\udc34", "♩ I love my little pony ♫", 
+	Ad myLittlePony = new Ad ("My Little Pony", "I love my little pony", 
 		new DemographicTarget (kidsDemographic, 10), 3, 2);	
 
 	Ad vegemite = new Ad ("Vegemite", "Aussie kids... are vegemite kids", 
-		new DemographicTarget (grownupsDemographic, 8), 4, 1);
+		new DemographicTarget (conspiracyTheoristsDemographic, 8), 4, 1);
 
 	public GameModel (List<Demographic> population = null,
 		List<Show> availShows = null,
@@ -207,7 +241,9 @@ new Dictionary<Demographic, int> {
 	{
 		return new List<Demographic> { 
 			kidsDemographic,
-			grownupsDemographic,
+			armchairAthleteDemographic,
+			hopelessRomanticDemographic,
+			conspiracyTheoristsDemographic,
 		};
 	}
 
