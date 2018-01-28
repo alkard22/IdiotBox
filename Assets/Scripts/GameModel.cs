@@ -436,7 +436,7 @@ public class ShowConcept
 
 	public int expectedRating()
 	{
-		var n = 0.001 * this.price + this.duration * 0.2;
+		var n = 0.001 * this.price + 1 * 0.2;
 		if (n <= 1.0)
 			return 1;
 		else if (n <= 2.0)
