@@ -178,19 +178,19 @@ new Dictionary<Demographic, int> {
     static Show FrankDeepShow = FrankDeepConcept.toShow(false);
 
     Ad nationalTiles = new Ad ("National Tiles", "<silly voice>Frank Walker from national tiles....", 
-		new DemographicTarget (hopelessRomanticDemographic, 10), 2, 2);
+		new DemographicTarget (hopelessRomanticDemographic, 40), 4, 4);
 
 	Ad francoCozzo = new Ad("Franco Cozzo", "Megalo, Megalo, Megalo! Grand Sale, Grand Sale, Grand Sale!", 
-		new DemographicTarget(armchairAthleteDemographic, 10), 3, 1);
+		new DemographicTarget(armchairAthleteDemographic, 30), 6, 4);
 
 	Ad transformers = new Ad ("Transformers", "Robots in disguise", 
-		new DemographicTarget (kidsDemographic, 10), 3, 5);		
+		new DemographicTarget (kidsDemographic, 20), 6, 6);		
 
 	Ad myLittlePony = new Ad ("My Little Pony", "I love my little pony", 
-		new DemographicTarget (kidsDemographic, 10), 3, 2);	
+		new DemographicTarget (kidsDemographic, 20), 8, 8);	
 
 	Ad vegemite = new Ad ("Vegemite", "Aussie kids... are vegemite kids", 
-		new DemographicTarget (conspiracyTheoristsDemographic, 8), 4, 1);
+		new DemographicTarget (conspiracyTheoristsDemographic, 16), 10, 10);
 
 	public GameModel (List<Demographic> population = null,
 		List<Show> availShows = null,
