@@ -157,10 +157,10 @@ new Dictionary<Demographic, int> {
 		Dictionary<Timeslot, Show> showProgram = null,
 		Dictionary<Timeslot, Ad> adProgram = null)
 	{
+		this.population = (population != null) ? population : initPopulation();
+
 		this.allConcepts = initConcepts();
 		this.allAds = initAds();
-
-		this.population = (population != null) ? population : initPopulation();
 
 		this.availShows = (availShows != null) ? availShows : initAvailShows();
 		this.availAds = (availAds != null) ? availAds : initAvailAds();
