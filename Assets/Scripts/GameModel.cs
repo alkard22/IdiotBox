@@ -411,25 +411,25 @@ public class ShowConcept
 	public string flavor;
 	public Dictionary<Demographic, int> demographicAppeal;
 	public int price;
-	public int duration;
+	public int developmentTime;
 
 
-	public ShowConcept(string name, String flavor, int price, int duration, Dictionary<Demographic, int> demographicAppeal)
+	public ShowConcept(string name, String flavor, int price, int developmentTime, Dictionary<Demographic, int> demographicAppeal)
 	{
 		this.name = name;
 		this.flavor = flavor;
 		this.demographicAppeal = demographicAppeal;
 		this.price = price;
-		this.duration = duration;
+		this.developmentTime = developmentTime;
 	}
 
 	public Show toShow(bool noise = true)
 	{
 		var random1 = noise ? UnityEngine.Random.Range(-10.0f, 10.0f) : 0.0f;
-		var peak = 0.01 * this.price + this.duration + random1;
+		var peak = 0.01 * this.price + this.developmentTime + random1;
 
 		var random2 = noise ? UnityEngine.Random.Range(-10.0f, 10.0f) : 0.0f;
-		var longevity = 0.01f * this.price + this.duration + random2;
+		var longevity = 0.01f * this.price + this.developmentTime + random2;
 
 		return new Show(this, (int) peak, (int) longevity);
 	}
