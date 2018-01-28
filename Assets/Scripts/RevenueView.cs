@@ -15,12 +15,12 @@ public class RevenueView : MonoBehaviour
     public void UpdateRevenue(int value)
     {
         trendIcon.SetActive(true);
-        if(currentRevenue < value) {
-            revenue.text = string.Format("{0:C0}", value);
+        if(currentRevenue > value) {
+            revenue.text = string.Format("{0:C0}", value/100);
             trendIcon.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, 180f);
             trendIcon.GetComponent<Image>().color = down;
-        } else if (currentRevenue > value) {
-            revenue.text = string.Format("{0:C0}", value);
+        } else if (currentRevenue < value) {
+            revenue.text = string.Format("{0:C0}", value/100);
             trendIcon.GetComponent<RectTransform>().rotation = Quaternion.identity;
             trendIcon.GetComponent<Image>().color = up;
         } else {
@@ -32,7 +32,10 @@ public class RevenueView : MonoBehaviour
 
     void Update()
     {
-        UpdateRevenue(GameState.current.balance / 100);
+        if(GameState.current.balance != currentRevenue)
+        {
+            UpdateRevenue(GameState.current.balance);
+        }
     }
 
 }
