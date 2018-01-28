@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using System.IO;
 
 public enum Timeslot
 {
@@ -157,10 +157,10 @@ new Dictionary<Demographic, int> {
 		Dictionary<Timeslot, Show> showProgram = null,
 		Dictionary<Timeslot, Ad> adProgram = null)
 	{
+		this.population = (population != null) ? population : initPopulation();
+
 		this.allConcepts = initConcepts();
 		this.allAds = initAds();
-
-		this.population = (population != null) ? population : initPopulation();
 
 		this.availShows = (availShows != null) ? availShows : initAvailShows();
 		this.availAds = (availAds != null) ? availAds : initAvailAds();
@@ -173,6 +173,37 @@ new Dictionary<Demographic, int> {
 		balance = 10000000;
 	}
 
+	Dictionary<Demographic, int> ParseDemographicAppeal(string input)
+	{
+		var inputPhrases = input.Split (',');
+		var output = new Dictionary<Demographic, int> ();
+
+		foreach(var inputPhrase in inputPhrases) {
+			var lexemes = inputPhrase.Split (':');
+			var demo = population.Find (d => d.name == lexemes [0]);
+
+			output [demo] = int.Parse(lexemes[1]);
+		}
+
+		return output;
+	}
+
+	public List<ShowConcept> LoadAllShowConceptsFromFile(string filename)
+	{
+		var showConcepts = new List<ShowConcept> ();
+		var reader = new StreamReader (filename);
+		string line;
+
+		while ((line = reader.ReadLine ()) != null) {
+			var fields = line.Split ('|');
+			var concept = new ShowConcept(fields[0], fields[1],int.Parse(fields[2]), int.Parse(fields[3]), ParseDemographicAppeal(fields[4]));
+
+			showConcepts.Add(concept);
+		}
+
+		return showConcepts;
+	}
+
 	List<Demographic> initPopulation()
 	{
 		return new List<Demographic> { 
@@ -183,9 +214,7 @@ new Dictionary<Demographic, int> {
 
 	List<ShowConcept> initConcepts()
 	{
-		return new List<ShowConcept> { 
-			blackMirrorConcept
-		};
+		return LoadAllShowConceptsFromFile ("Assets/Data/all-shows.csv");
 	}
 
 

@@ -34,13 +34,17 @@ public class BarGraph : MonoBehaviour {
 
     public Image graphImagePrefab;
     public ShowAvatar avatarPrefab;
+    public ShowAvatar adAvatarPrefab;
+    public Text timeslotPrefab;
     public GameObject spacer;
 
     private int barFixedWidth = 30;
+    private int barUnitSize = 10;
 
     private Data data = new Data();
     private Dictionary<String, Image> bars = new Dictionary<String, Image>();
     private Dictionary<Timeslot, ShowAvatar> avatars = new Dictionary<Timeslot, ShowAvatar>();
+    private Dictionary<Timeslot, ShowAvatar> adAvatars = new Dictionary<Timeslot, ShowAvatar>();
 
     void Awake()
     {
@@ -50,13 +54,19 @@ public class BarGraph : MonoBehaviour {
 
         foreach (Timeslot t in Enum.GetValues(typeof(Timeslot)))
         {
+            Text label = Instantiate(timeslotPrefab);
+            label.text = t.ToString();
+            label.GetComponent<RectTransform>().SetParent(this.transform);
+
             GameObject horizontal = buildHorizontalLayoutGroup(t.ToString() + "Group");
+
+            Instantiate(spacer).GetComponent<RectTransform>().SetParent(horizontal.transform);
+
             ShowAvatar avatar = Instantiate(avatarPrefab);
             avatar.GetComponent<RectTransform>().SetParent(horizontal.transform);
             avatars.Add(t, avatar);
 
-            GameObject space = Instantiate(spacer);
-            space.GetComponent<RectTransform>().SetParent(horizontal.transform);
+            Instantiate(spacer).GetComponent<RectTransform>().SetParent(horizontal.transform);
 
             foreach (Demographic d in GameState.current.population)
             {
@@ -71,6 +81,12 @@ public class BarGraph : MonoBehaviour {
                 bar.GetComponent<RectTransform>().sizeDelta = new Vector2(data[t][d], barFixedWidth);
                 bar.GetComponent<RectTransform>().SetParent(horizontal.transform);
             }
+
+            Instantiate(spacer).GetComponent<RectTransform>().SetParent(horizontal.transform);
+
+            ShowAvatar adAvatar = Instantiate(adAvatarPrefab);
+            adAvatar.GetComponent<RectTransform>().SetParent(horizontal.transform);
+            adAvatars.Add(t, adAvatar);
         }
     }
 
@@ -95,6 +111,10 @@ public class BarGraph : MonoBehaviour {
         foreach (Timeslot t in timeslots)
         {
             int totalAudienceOffset = 0;
+            
+            adAvatars[t].title = GameState.current.adProgram[t].name;
+            adAvatars[t].GenerateAvatar();
+
             Dictionary<Demographic, int> viewers = GameState.current.Viewers(t);
             avatars[t].title = GameState.current.showProgram[t].concept.name;
             avatars[t].GenerateAvatar();
@@ -102,7 +122,7 @@ public class BarGraph : MonoBehaviour {
             {
                 String key = t.ToString() + "-" + d.name;
                 RectTransform rect = bars[key].GetComponent<RectTransform>();
-                rect.sizeDelta = new Vector2(viewers[d], barFixedWidth);
+                rect.sizeDelta = new Vector2(viewers[d] * barUnitSize, barFixedWidth);
                 totalAudienceOffset += viewers[d];
             }
         }
