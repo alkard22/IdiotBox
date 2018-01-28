@@ -20,7 +20,7 @@ public class ShowDetailsView : MonoBehaviour
         ShowTitle.text = show.concept.name;
         avatar.title = show.concept.name;
         price.text = string.Format("{0:C0}", show.concept.price);
-        potentialRating.SetStarRating(4); //TO FINISH
+        potentialRating.SetStarRating(show.concept.ExpectedRating());
         developmentTime.text = show.concept.developmentTime + " week";
 
         Dictionary<Demographic, int> appeal = show.concept.demographicAppeal;
