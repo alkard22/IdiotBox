@@ -11,6 +11,11 @@ public class TimeSlotSlector : MonoBehaviour
     public Color selectColor;
     public Color normalColor;
 
+    private void OnEnable()
+    {
+        SetSlotAsActive(slots[0]);
+    }
+
     public void SetSlotAsActive(GameObject slot)
     {
         foreach(GameObject obj in slots) {

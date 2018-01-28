@@ -405,9 +405,7 @@ new Dictionary<Demographic, int> {
 	public void NextTurn() {
 		
 		turn++;
-		Debug.Log (balance);
 		balance += Revenue ().Aggregate (0, (sum, pair) => sum += pair.Value);
-		Debug.Log (balance);
 		foreach(var item in showProgram) {
 			item.Value.weeksShowing++;
 		}
