@@ -47,7 +47,8 @@ public class BarGraph : MonoBehaviour {
     private Dictionary<String, Image> bars = new Dictionary<String, Image>();
     private Dictionary<Timeslot, ShowAvatar> avatars = new Dictionary<Timeslot, ShowAvatar>();
     private Dictionary<Timeslot, ShowAvatar> adAvatars = new Dictionary<Timeslot, ShowAvatar>();
-
+    private Dictionary<Timeslot, Text> revenueTags = new Dictionary<Timeslot, Text>();
+    
     void Awake()
     {
         Dictionary<String, Material> colors = new Dictionary<String, Material>();
@@ -91,6 +92,10 @@ public class BarGraph : MonoBehaviour {
             ShowAvatar adAvatar = Instantiate(adAvatarPrefab);
             adAvatar.GetComponent<RectTransform>().SetParent(horizontal.transform);
             adAvatars.Add(t, adAvatar);
+
+            Text revenue = Instantiate(timeslotPrefab);
+            revenue.GetComponent<RectTransform>().SetParent(horizontal.transform);
+            revenueTags.Add(t, revenue);
         }
     }
 
@@ -129,6 +134,8 @@ public class BarGraph : MonoBehaviour {
                 rect.sizeDelta = new Vector2(viewers[d] * barUnitSize, barFixedWidth);
                 totalAudienceOffset += viewers[d];
             }
+
+            revenueTags[t].text = "$" + GameState.current.Revenue()[t]/100;
         }
     }
 
