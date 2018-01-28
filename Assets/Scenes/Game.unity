@@ -404,6 +404,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e0a72ed68f0e34e83c04d59520a14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundAnimations:
+  - {fileID: 21300000, guid: 2bc32e7bb698dbd4ab1b3b8de23d187f, type: 3}
+  - {fileID: 21300000, guid: 5137c7b7777cd5c44bf81022dfaeac82, type: 3}
+  - {fileID: 21300000, guid: 6a5c0acc0fd883748bd3844b40049cf6, type: 3}
+  - {fileID: 21300000, guid: d5f3b99f75f8a224a96b9eef5785aa5e, type: 3}
+  - {fileID: 21300000, guid: 6c15822070a44404b94563e7d0e00d0d, type: 3}
+  - {fileID: 21300000, guid: 5b3c355f83decb4498121b86016982e3, type: 3}
+  - {fileID: 21300000, guid: e6ecf2eeab49ac74dbd9f6e071dbc9be, type: 3}
 --- !u!1 &538789904
 GameObject:
   m_ObjectHideFlags: 0

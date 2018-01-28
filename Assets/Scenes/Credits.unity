@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 1508880185}
   - component: {fileID: 1508880187}
   - component: {fileID: 1508880186}
+  - component: {fileID: 1508880188}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -568,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.647}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -589,6 +590,25 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1508880184}
+--- !u!114 &1508880188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1508880184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e0a72ed68f0e34e83c04d59520a14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundAnimations:
+  - {fileID: 21300000, guid: 2bc32e7bb698dbd4ab1b3b8de23d187f, type: 3}
+  - {fileID: 21300000, guid: 5137c7b7777cd5c44bf81022dfaeac82, type: 3}
+  - {fileID: 21300000, guid: 6a5c0acc0fd883748bd3844b40049cf6, type: 3}
+  - {fileID: 21300000, guid: d5f3b99f75f8a224a96b9eef5785aa5e, type: 3}
+  - {fileID: 21300000, guid: 6c15822070a44404b94563e7d0e00d0d, type: 3}
+  - {fileID: 21300000, guid: 5b3c355f83decb4498121b86016982e3, type: 3}
+  - {fileID: 21300000, guid: e6ecf2eeab49ac74dbd9f6e071dbc9be, type: 3}
 --- !u!1 &1645796343
 GameObject:
   m_ObjectHideFlags: 0
