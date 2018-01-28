@@ -439,11 +439,11 @@ public class ShowConcept
 		var n = 0.001 * this.price + this.duration * 0.2;
 		if (n <= 1.0)
 			return 1;
-		else if (new <= 2.0)
+		else if (n <= 2.0)
 			return 2;
-		else if (new <= 3.0)
+		else if (n <= 3.0)
 			return 3;
-		else if (new <= 4.0)
+		else if (n <= 4.0)
 			return 4;
 		else 
 			return 5;
